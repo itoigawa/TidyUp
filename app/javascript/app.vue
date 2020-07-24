@@ -1,15 +1,6 @@
 <template>
-  <div>
-    <ItemsHeader></ItemsHeader>
-  </div>
+  <router-view />
 </template>
 
 <script>
-  import ItemsHeader from 'components/ItemsHeader.vue'
-
-  export default {
-    components: {
-      ItemsHeader,
-    }
-  }
 </script>
