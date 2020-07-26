@@ -1,20 +1,23 @@
 <template>
-  <div>
-    <TheHeader /><br><br>
+  <div id="app">
+    <TheHeader />
     <CardsList />
+    <ExhibitButton />
     <TheFooter />
   </div>
 </template>
 
 <script>
-  import TheHeader from 'components/item/TheHeader.vue';
-  import CardsList from 'components/item/CardsList.vue';
+  import TheHeader from 'components/item/TheHeader.vue'
+  import CardsList from 'components/item/CardsList.vue'
+  import ExhibitButton from 'components/item/ExhibitButton.vue'
   import TheFooter from 'components/TheFooter.vue'
 
   export default {
     components: {
       TheHeader,
       CardsList,
+      ExhibitButton,
       TheFooter
     }
   }
