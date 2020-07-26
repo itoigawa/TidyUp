@@ -1,15 +1,24 @@
 <template>
   <div>
-    <ItemHeader />
+    <TheHeader /><br><br>
+    <CardsList />
+    <TheFooter />
   </div>
 </template>
 
 <script>
-  import ItemHeader from 'components/ItemHeader.vue';
+  import TheHeader from 'components/item/TheHeader.vue';
+  import CardsList from 'components/item/CardsList.vue';
+  import TheFooter from 'components/TheFooter.vue'
 
   export default {
     components: {
-      ItemHeader
+      TheHeader,
+      CardsList,
+      TheFooter
     }
   }
 </script>
+
+<style scoped>
+</style>
