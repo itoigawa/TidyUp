@@ -95,3 +95,6 @@
     }),
   }
 </script>
+
+<style scoped>
+</style>
