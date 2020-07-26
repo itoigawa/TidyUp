@@ -1,5 +1,5 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+import Vue from 'vue'
+import Router from 'vue-router'
 import ItemIndex from 'pages/item/index.vue'
 
 Vue.use(Router)

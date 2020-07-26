@@ -6,8 +6,8 @@
 // All it does is render <div>Hello Vue</div> at the bottom of the page.
 
 import Vue from 'vue'
-import Vuetify from "vuetify";
-import "vuetify/dist/vuetify.min.css";
+import Vuetify from "vuetify"
+import "vuetify/dist/vuetify.min.css"
 import router from '../router'
 import App from '../app.vue'
 

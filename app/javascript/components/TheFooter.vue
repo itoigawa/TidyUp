@@ -1,16 +1,28 @@
 <template>
-  <div class="footer-wrapper">
-    <div class="content-footer">
-      <p>Copyright © 2020. TidyUp</p>
-    </div>
-  </div>
+  <v-card height="13.2rem">
+    <v-footer
+      absolute
+      class="font-weight-medium"
+    >
+      <v-col
+        class="text-center"
+      >
+      <div class="text">
+        {{ new Date().getFullYear() }} — <strong>TidyUp</strong>
+      </div>
+      </v-col>
+    </v-footer>
+  </v-card>
 </template>
 
 <style scoped>
-.footer-wrapper {
-  background-color: white;
-  color: #869099;
+.text-center{
   text-align: center;
-  margin: 1.5rem 0;
+  height: 12rem;
+}
+
+.text{
+  margin-top: 4.2rem;
 }
 </style>
+

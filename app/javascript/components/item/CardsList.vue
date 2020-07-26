@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <main>
     <div class="cards-row">
       <div class="one">
         <article class="card">
@@ -276,17 +276,16 @@
         </article>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>
 </script>
 
 <style scoped>
-.wrapper{
-  margin-top: 177px;
+main{
+  padding-top: 14.2rem;
 }
-
 .cards-row{
   display: grid;
   min-width: 100vh;
@@ -349,7 +348,6 @@
 
 .card-icons{
   margin-left: 12rem;
-  float: right;
 }
 
 </style>
