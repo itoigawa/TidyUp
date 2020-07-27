@@ -3,7 +3,7 @@
   <div class="icon-field">
     <div class="text">登録</div>
     <v-btn icon>
-      <v-icon>mdi-camera-plus</v-icon>
+      <v-icon>mdi-hanger</v-icon>
     </v-btn>
   </div>
 </div>
@@ -33,8 +33,8 @@
   margin-bottom: 0.6rem;
 }
 
-.mdi-camera-plus::before{
+.mdi-hanger::before{
   color:rgba(245, 245, 245);
-  font-size: 4.5rem;
+  font-size: 4.8rem;
 }
 </style>

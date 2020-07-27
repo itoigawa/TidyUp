@@ -24,15 +24,15 @@
       <v-spacer></v-spacer>
 
       <v-btn icon>
-        <v-icon>mdi-hanger</v-icon>
+        <v-icon>mdi-wardrobe-outline</v-icon>
       </v-btn>
 
       <v-btn icon>
-        <v-icon>mdi-calendar-month</v-icon>
+        <v-icon>mdi-calendar-month-outline</v-icon>
       </v-btn>
 
       <v-btn icon>
-        <v-icon>mdi-archive</v-icon>
+        <v-icon>mdi-archive-outline</v-icon>
       </v-btn>
 
       <v-btn icon>
@@ -97,4 +97,7 @@
 </script>
 
 <style scoped>
+.v-card{
+  padding-bottom: 14.2rem;
+}
 </style>
