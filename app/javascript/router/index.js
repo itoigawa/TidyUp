@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import ItemIndex from 'pages/item/index.vue'
 import UserRoutes from './user-routes'
+import UserSessionRoutes from './user_session-routes'
 
 Vue.use(Router)
 
@@ -13,7 +14,8 @@ const router = new Router({
       component: ItemIndex,
       name: 'ItemIndex'
     },
-    { ...UserRoutes }
+    { ...UserRoutes },
+    { ...UserSessionRoutes }
   ],
 })
 
