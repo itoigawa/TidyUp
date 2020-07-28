@@ -31,6 +31,7 @@ module TidyUp
     config.generators.system_tests = nil
 
     config.generators do |g|
+      g.skip_routes true
       g.stylesheets false
       g.javascripts false
       g.helper false

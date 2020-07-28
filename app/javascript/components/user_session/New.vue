@@ -1,7 +1,7 @@
 <template>
 <div class="form-wrapper">
   <div class="form-card">
-    <div class="register">ユーザー登録</div>
+    <div class="register">ログイン</div>
     <form>
       <v-text-field
         v-model="email"
@@ -19,10 +19,18 @@
         @input="$v.password.$touch()"
         @blur="$v.password.$touch()"
       ></v-text-field>
-      <v-btn width="16%" color="primary"  @click="submit">登録</v-btn>
-        <v-btn width="16%" color="red" dark @click="clear">消去</v-btn>
-      <div class="login-link">
-        <router-link to="/login">ログインはこちらから</router-link>
+      <v-btn width="20%" color="primary"  @click="submit">ログイン</v-btn>
+      <v-btn width="16%" color="red" dark @click="clear">消去</v-btn>
+      <div class="test-login">
+        <v-btn color="warning">
+          お試しログイン
+          <v-icon right dark>mdi-account-check</v-icon>
+        </v-btn>
+        <div class="register-link">
+          <router-link to="/users/new">
+            登録はこちらから
+          </router-link>
+      </div>
       </div>
     </form>
   </div>
@@ -92,16 +100,16 @@
   min-width: 100vh;
   min-height: 100vh;
   display: grid;
-  grid-template:"....  ........   ...." 15%
+  grid-template:"....  ........   ...." 12%
                 "....  register   ...." 8%
-                ".... form-card     ...." 54%
-                ".... login-link  ...."  8%
-                "....  .........  ...."  15%
+                ".... form-card     ...." 60%
+                ".... register-link  ...."  8%
+                "....  .........  ...."  12%
                 / 30%  40% 30%
 }
 
 .form-card{
-  border-top: 4px solid #18ebfa;
+  border-top: 4px solid#bf0000;;
   border-radius: 3px;
   background-color:white ;
   grid-area: form-card;
@@ -130,9 +138,8 @@ form{
   margin-left: 2rem;
 }
 
-.login-link{
-  grid-area: login-link;
-  margin-top: 2rem;
+.register-link{
+  margin-top: 1.7rem;
   margin-left: 2rem;
 }
 </style>
