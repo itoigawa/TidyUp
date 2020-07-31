@@ -1,5 +1,5 @@
 import User from 'components/user/User'
-import New from 'components/user/New'
+import UserNew from 'components/user/New'
 
 export default {
   path: '/users',
@@ -7,7 +7,7 @@ export default {
   children: [
     {
       path: 'new',
-      component: New
+      component: UserNew
     },
   ]
 }
