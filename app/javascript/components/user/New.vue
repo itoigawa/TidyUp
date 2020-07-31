@@ -94,8 +94,8 @@
   display: grid;
   grid-template:"....  ........   ...." 15%
                 "....  register   ...." 8%
-                ".... form-card     ...." 54%
-                ".... login-link  ...."  8%
+                "....  form-card  ...." 54%
+                "....  login-link  ...."  8%
                 "....  .........  ...."  15%
                 / 30%  40% 30%
 }
