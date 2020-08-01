@@ -96,7 +96,6 @@
 
 <style scoped>
 .form-wrapper{
-  background-color: #f7f7f7;
   min-width: 100vh;
   min-height: 100vh;
   display: grid;

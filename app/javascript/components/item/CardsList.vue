@@ -6,7 +6,7 @@
           <div class="card__header">
             <h3 class="card__title">フルジップパーカ</h3>
             <figure class="card__thumbnail">
-              <img src="assets/sample_wear.png" alt="手書きの「正義」という文字が縦に大きくマジックで書かれている白いTシャツ" class="card__image">
+              <img src="assets/sample_wear.png" class="card__image">
               <div class="card-icons">
                 <v-btn icon>
                   <v-icon>mdi-pencil</v-icon>
@@ -24,7 +24,7 @@
           <div class="card__header">
             <h3 class="card__title">フルジップパーカ</h3>
             <figure class="card__thumbnail">
-              <img src="assets/sample_wear.png" alt="手書きの「正義」という文字が縦に大きくマジックで書かれている白いTシャツ" class="card__image">
+              <img src="assets/sample_wear.png" class="card__image">
               <div class="card-icons">
                 <v-btn icon>
                   <v-icon>mdi-pencil</v-icon>
@@ -42,7 +42,7 @@
           <div class="card__header">
             <h3 class="card__title">フルジップパーカ</h3>
             <figure class="card__thumbnail">
-              <img src="assets/sample_wear.png" alt="手書きの「正義」という文字が縦に大きくマジックで書かれている白いTシャツ" class="card__image">
+              <img src="assets/sample_wear.png" class="card__image">
               <div class="card-icons">
                 <v-btn icon>
                   <v-icon>mdi-pencil</v-icon>
@@ -60,7 +60,7 @@
           <div class="card__header">
             <h3 class="card__title">フルジップパーカ</h3>
             <figure class="card__thumbnail">
-              <img src="assets/sample_wear.png" alt="手書きの「正義」という文字が縦に大きくマジックで書かれている白いTシャツ" class="card__image">
+              <img src="assets/sample_wear.png" class="card__image">
               <div class="card-icons">
                 <v-btn icon>
                   <v-icon>mdi-pencil</v-icon>
@@ -78,7 +78,7 @@
           <div class="card__header">
             <h3 class="card__title">フルジップパーカ</h3>
             <figure class="card__thumbnail">
-              <img src="assets/sample_wear.png" alt="手書きの「正義」という文字が縦に大きくマジックで書かれている白いTシャツ" class="card__image">
+              <img src="assets/sample_wear.png" class="card__image">
               <div class="card-icons">
                 <v-btn icon>
                   <v-icon>mdi-pencil</v-icon>
@@ -98,7 +98,7 @@
           <div class="card__header">
             <h3 class="card__title">フルジップパーカ</h3>
             <figure class="card__thumbnail">
-              <img src="assets/sample_wear.png" alt="手書きの「正義」という文字が縦に大きくマジックで書かれている白いTシャツ" class="card__image">
+              <img src="assets/sample_wear.png" class="card__image">
               <div class="card-icons">
                 <v-btn icon>
                   <v-icon>mdi-pencil</v-icon>
@@ -116,7 +116,7 @@
           <div class="card__header">
             <h3 class="card__title">フルジップパーカ</h3>
             <figure class="card__thumbnail">
-              <img src="assets/sample_wear.png" alt="手書きの「正義」という文字が縦に大きくマジックで書かれている白いTシャツ" class="card__image">
+              <img src="assets/sample_wear.png" class="card__image">
               <div class="card-icons">
                 <v-btn icon>
                   <v-icon>mdi-pencil</v-icon>
@@ -134,7 +134,7 @@
           <div class="card__header">
             <h3 class="card__title">フルジップパーカ</h3>
             <figure class="card__thumbnail">
-              <img src="assets/sample_wear.png" alt="手書きの「正義」という文字が縦に大きくマジックで書かれている白いTシャツ" class="card__image">
+              <img src="assets/sample_wear.png" class="card__image">
               <div class="card-icons">
                 <v-btn icon>
                   <v-icon>mdi-pencil</v-icon>
@@ -152,7 +152,7 @@
           <div class="card__header">
             <h3 class="card__title">フルジップパーカ</h3>
             <figure class="card__thumbnail">
-              <img src="assets/sample_wear.png" alt="手書きの「正義」という文字が縦に大きくマジックで書かれている白いTシャツ" class="card__image">
+              <img src="assets/sample_wear.png" class="card__image">
               <div class="card-icons">
                 <v-btn icon>
                   <v-icon>mdi-pencil</v-icon>
@@ -170,7 +170,7 @@
           <div class="card__header">
             <h3 class="card__title">フルジップパーカ</h3>
             <figure class="card__thumbnail">
-              <img src="assets/sample_wear.png" alt="手書きの「正義」という文字が縦に大きくマジックで書かれている白いTシャツ" class="card__image">
+              <img src="assets/sample_wear.png" class="card__image">
               <div class="card-icons">
                 <v-btn icon>
                   <v-icon>mdi-pencil</v-icon>
@@ -190,7 +190,7 @@
           <div class="card__header">
             <h3 class="card__title">フルジップパーカ</h3>
             <figure class="card__thumbnail">
-              <img src="assets/sample_wear.png" alt="手書きの「正義」という文字が縦に大きくマジックで書かれている白いTシャツ" class="card__image">
+              <img src="assets/sample_wear.png" class="card__image">
               <div class="card-icons">
                 <v-btn icon>
                   <v-icon>mdi-pencil</v-icon>
@@ -208,7 +208,7 @@
           <div class="card__header">
             <h3 class="card__title">フルジップパーカ</h3>
             <figure class="card__thumbnail">
-              <img src="assets/sample_wear.png" alt="手書きの「正義」という文字が縦に大きくマジックで書かれている白いTシャツ" class="card__image">
+              <img src="assets/sample_wear.png" class="card__image">
               <div class="card-icons">
                 <v-btn icon>
                   <v-icon>mdi-pencil</v-icon>
@@ -226,7 +226,7 @@
           <div class="card__header">
             <h3 class="card__title">フルジップパーカ</h3>
             <figure class="card__thumbnail">
-              <img src="assets/sample_wear.png" alt="手書きの「正義」という文字が縦に大きくマジックで書かれている白いTシャツ" class="card__image">
+              <img src="assets/sample_wear.png" class="card__image">
               <div class="card-icons">
                 <v-btn icon>
                   <v-icon>mdi-pencil</v-icon>
@@ -244,7 +244,7 @@
           <div class="card__header">
             <h3 class="card__title">フルジップパーカ</h3>
             <figure class="card__thumbnail">
-              <img src="assets/sample_wear.png" alt="手書きの「正義」という文字が縦に大きくマジックで書かれている白いTシャツ" class="card__image">
+              <img src="assets/sample_wear.png" class="card__image">
               <div class="card-icons">
                 <v-btn icon>
                   <v-icon>mdi-pencil</v-icon>
@@ -262,7 +262,7 @@
           <div class="card__header">
             <h3 class="card__title">フルジップパーカ</h3>
             <figure class="card__thumbnail">
-              <img src="assets/sample_wear.png" alt="手書きの「正義」という文字が縦に大きくマジックで書かれている白いTシャツ" class="card__image">
+              <img src="assets/sample_wear.png" class="card__image">
               <div class="card-icons">
                 <v-btn icon>
                   <v-icon>mdi-pencil</v-icon>
@@ -317,8 +317,7 @@
   background-color: #fff;
   box-shadow: 0 7px 10px 2px rgba(0, 0, 0, 0.08);
   border-radius: 3px;
-  color: #212121;
-  text-decoration: none;
+  border: 1.8px solid white;
 }
 
 .card__header {

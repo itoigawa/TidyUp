@@ -20,7 +20,7 @@
         @blur="$v.password.$touch()"
       ></v-text-field>
       <v-btn width="16%" color="primary"  @click="submit">登録</v-btn>
-        <v-btn width="16%" color="red" dark @click="clear">消去</v-btn>
+      <v-btn width="16%" color="red" dark @click="clear">消去</v-btn>
       <div class="login-link">
         <router-link to="/login">ログインはこちらから</router-link>
       </div>
@@ -88,7 +88,6 @@
 
 <style scoped>
 .form-wrapper{
-  background-color: #f7f7f7;
   min-width: 100vh;
   min-height: 100vh;
   display: grid;

@@ -1,12 +1,12 @@
 <template>
-<div class="exhibit_btn">
+<router-link to="/items/new" class="exhibit_btn">
   <div class="icon-field">
     <div class="text">登録</div>
     <v-btn icon>
       <v-icon>mdi-hanger</v-icon>
     </v-btn>
   </div>
-</div>
+</router-link>
 </template>
 
 <style scoped>
@@ -14,6 +14,7 @@
   cursor: pointer;
   bottom: 2rem;
   font-size: 1.375rem;
+  text-decoration: none;
   height: 10rem;
   right: 2rem;
   width: 10rem;

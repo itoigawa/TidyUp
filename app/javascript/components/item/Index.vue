@@ -1,21 +1,24 @@
 <template>
 <div>
-  <TheHeader />
+  <IndexHeader />
   <CardsList />
   <ExhibitButton />
+  <TheFooter />
 </div>
 </template>
 
 <script>
-  import TheHeader from 'components/item/TheHeader.vue'
-  import CardsList from 'components/item/CardsList.vue'
-  import ExhibitButton from 'components/item/ExhibitButton.vue'
+  import IndexHeader from 'components/item/IndexHeader'
+  import CardsList from 'components/item/CardsList'
+  import ExhibitButton from 'components/item/ExhibitButton'
+  import TheFooter from 'components/shared/TheFooter'
 
   export default {
     components: {
-      TheHeader,
+      IndexHeader,
       CardsList,
       ExhibitButton,
+      TheFooter
     }
   }
 </script>

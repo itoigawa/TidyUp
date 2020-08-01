@@ -98,6 +98,6 @@
 
 <style scoped>
 .v-card{
-  padding-bottom: 14.2rem;
+  padding-bottom: 14rem;
 }
 </style>
