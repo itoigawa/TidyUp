@@ -32,7 +32,9 @@
       </v-btn>
 
       <v-btn icon>
-        <v-icon>mdi-archive-outline</v-icon>
+        <router-link to="/list" class="icon">
+          <v-icon>mdi-archive-outline</v-icon>
+        </router-link>
       </v-btn>
 
       <v-btn icon>
@@ -99,5 +101,10 @@
 <style scoped>
 .v-card{
   padding-bottom: 14rem;
+}
+
+.icon{
+  text-decoration: none;
+  color: white;
 }
 </style>
