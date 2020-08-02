@@ -17,6 +17,8 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+  def list; end
+
   private
 
   def item_params

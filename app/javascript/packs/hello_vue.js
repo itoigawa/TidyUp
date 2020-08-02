@@ -9,10 +9,12 @@ import Vue from 'vue'
 import Vuetify from "vuetify"
 import "vuetify/dist/vuetify.min.css"
 import router from '../router'
+import axios from '../plugins/axios'
 import App from '../app.vue'
 
 Vue.use(Vuetify);
 const vuetify = new Vuetify();
+Vue.prototype.$axios = axios
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
