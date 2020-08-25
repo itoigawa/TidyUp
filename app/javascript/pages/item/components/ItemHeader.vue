@@ -1,14 +1,10 @@
 <template>
-  <v-card class="overflow-hidden">
+  <v-card>
     <v-app-bar
-      absolute
       color="#aaacb5"
       dark
-      shrink-on-scroll
       prominent
       src="/assets/header_image.png"
-      fade-img-on-scroll
-      scroll-target="#scrolling-techniques-4"
     >
       <template v-slot:img="{ props }">
         <v-img
@@ -32,9 +28,12 @@
       </v-btn>
 
       <v-btn icon>
-        <router-link to="/list" class="icon">
+        <div 
+          class="icon"
+          @click="handleDataTable"
+          >
           <v-icon>mdi-archive-outline</v-icon>
-        </router-link>
+        </div>
       </v-btn>
 
       <v-btn icon>
@@ -86,23 +85,24 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      items: [
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me 2' },
-      ],
-    }),
+export default {
+  data: () => ({
+    items: [
+      { title: 'Click Me' },
+      { title: 'Click Me' },
+      { title: 'Click Me' },
+      { title: 'Click Me 2' },
+    ],
+  }),
+  methods: {
+    handleDataTable(){
+      this.$emit('data-table')
+    }
   }
+}
 </script>
 
 <style scoped>
-.v-card{
-  padding-bottom: 14rem;
-}
-
 .icon{
   text-decoration: none;
   color: white;

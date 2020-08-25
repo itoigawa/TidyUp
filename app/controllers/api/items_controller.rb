@@ -1,4 +1,4 @@
-class ItemsController < ApplicationController
+class Api::ItemsController < ApplicationController
   def index; end
 
   def new; end
@@ -16,8 +16,6 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
   end
-
-  def list; end
 
   private
 

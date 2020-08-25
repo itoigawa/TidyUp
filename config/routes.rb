@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  root 'items#index'
-  get '/list', to: 'items#list'
-  resources :items
-  resources :users
-  get '/login', to: 'user_sessions#new'
-  # get '*path', to: 'items#index'
+  root 'home#index'
+  namespace :api do
+    resources :items
+    resources :sessions
+    resources :users
+  end
+  get '*path', to: 'home#index'
 end

@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import ItemIndex from 'components/item/Index'
-import ItemRoutes from './item-routes'
-import UserSessionRoutes from './user_session-routes'
-import UserRoutes from './user-routes'
+import ItemIndex from '../pages/item/index'
+import RegisterIndex from '../pages/register/index'
+import LoginIndex from '../pages/login/index'
 
 Vue.use(Router)
 
@@ -11,13 +10,20 @@ const router = new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '/items',
       component: ItemIndex,
       name: 'ItemIndex'
     },
-    { ...ItemRoutes },
-    { ...UserSessionRoutes },
-    { ...UserRoutes },
+    {
+      path: "/register",
+      component: RegisterIndex,
+      name: "RegisterIndex",
+    },
+    {
+      path: "/login",
+      component: LoginIndex,
+      name: "LoginIndex",
+    },
   ],
 })
 

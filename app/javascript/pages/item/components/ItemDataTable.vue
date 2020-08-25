@@ -1,6 +1,5 @@
 <template>
 <div>
-  <TheHeader />
   <v-card>
     <div class="search-box">
       <v-text-field
@@ -71,12 +70,7 @@
 </template>
 
 <script>
-import TheHeader from 'components/shared/TheHeader'
-
 export default {
-  components: {
-    TheHeader
-  },
   data () {
     return {
       search: '',

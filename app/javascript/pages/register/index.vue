@@ -27,63 +27,62 @@
     </form>
   </div>
 </div>
-
-  
 </template>
 
 <script>
-  import { validationMixin } from 'vuelidate'
-  import { required, minLength, email } from 'vuelidate/lib/validators'
+import { validationMixin } from 'vuelidate'
+import { required, minLength, email } from 'vuelidate/lib/validators'
 
-  export default {
-    mixins: [validationMixin],
+export default {
+  name: "RegisterIndex",
+  mixins: [validationMixin],
 
-    validations: {
-      email: { required, email },
-      password: { required, minLength: minLength(3) },
-      checkbox: {
-        checked (val) {
-          return val
-        },
+  validations: {
+    email: { required, email },
+    password: { required, minLength: minLength(3) },
+    checkbox: {
+      checked (val) {
+        return val
       },
     },
+  },
 
-    data: () => ({
-      email: '',
-      password: '',
-      select: null,
-      checkbox: false,
-    }),
+  data: () => ({
+    email: '',
+    password: '',
+    select: null,
+    checkbox: false,
+  }),
 
-    computed: {
-      emailErrors () {
-        const errors = []
-        if (!this.$v.email.$dirty) return errors
-        !this.$v.email.email && errors.push('有効なメールアドレスを入力してください')
-        !this.$v.email.required && errors.push('メールアドレスを入力してください')
-        return errors
-      },
-      passwordErrors () {
-        const errors = []
-        if (!this.$v.password.$dirty) return errors
-        !this.$v.password.minLength && errors.push('3文字以上のパスワードを入力してください')
-        !this.$v.password.required && errors.push('パスワードを入力してください')
-        return errors
-      },
+  computed: {
+    emailErrors () {
+      const errors = []
+      if (!this.$v.email.$dirty) return errors
+      !this.$v.email.email && errors.push('有効なメールアドレスを入力してください')
+      !this.$v.email.required && errors.push('メールアドレスを入力してください')
+      return errors
     },
-
-    methods: {
-      submit () {
-        this.$v.$touch()
-      },
-      clear () {
-        this.$v.$reset()
-        this.email = ''
-        this.password = ''
-        this.checkbox = false
-      },
+    passwordErrors () {
+      const errors = []
+      if (!this.$v.password.$dirty) return errors
+      !this.$v.password.minLength && errors.push('3文字以上のパスワードを入力してください')
+      !this.$v.password.required && errors.push('パスワードを入力してください')
+      return errors
     },
-  }
+  },
+
+  methods: {
+    submit () {
+      this.$v.$touch()
+    },
+    clear () {
+      this.$v.$reset()
+      this.email = ''
+      this.password = ''
+      this.checkbox = false
+    },
+  },
+}
 </script>
 
 <style scoped>
