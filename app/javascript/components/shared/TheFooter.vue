@@ -1,33 +1,18 @@
 <template>
-  <v-card height="12.8rem">
-    <v-footer
-      absolute
-      class="font-weight-medium"
-    >
-      <v-col
-        class="white--text text-center"
-      >
-      <div class="text">
-        <strong>{{ new Date().getFullYear() }} — TidyUp</strong>
-      </div>
-      </v-col>
-    </v-footer>
-  </v-card>
+  <footer class="text-center">
+    <small>Copyright &copy; 2020. TidyUp</small>
+  </footer>
 </template>
 
-<style scoped>
-.v-footer{
-  background-color:rgba(0,0,0,.62);
+<script>
+export default {
+  name: "TheFooter"
 }
+</script>
 
+<style scoped>
 .text-center{
   text-align: center;
-  height: 12rem;
-}
-
-.text{
-  margin-top: 4.2rem;
-  color: white;
+  margin: 3rem 0;
 }
 </style>
-

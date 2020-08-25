@@ -1,7 +1,8 @@
 <template>
   <main>
     <div class="cards-row">
-      <div class="one">
+      <div class="one" 
+           @click="handleDetailItem">
         <article class="card">
           <div class="card__header">
             <h3 class="card__title">フルジップパーカ</h3>
@@ -280,6 +281,14 @@
 </template>
 
 <script>
+export default {
+  name: 'ItemCardsList',
+  methods: {
+    handleDetailItem() {
+      this.$emit('detail-item')
+    }
+  }
+}
 </script>
 
 <style scoped>

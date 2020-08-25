@@ -1,13 +1,26 @@
 <template>
-<router-link to="/items/new" class="exhibit_btn">
+<div
+  class="exhibit_btn"
+  @click="handleCreateItem">
   <div class="icon-field">
     <div class="text">登録</div>
     <v-btn icon>
       <v-icon>mdi-hanger</v-icon>
     </v-btn>
   </div>
-</router-link>
+</div>
 </template>
+
+<script>
+export default {
+  name: 'ItemExhibitButton',
+  methods: {
+    handleCreateItem() {
+      this.$emit('create-item', this.item)
+    }
+  }
+}
+</script>
 
 <style scoped>
 .exhibit_btn {
