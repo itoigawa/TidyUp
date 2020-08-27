@@ -152,9 +152,9 @@ export default {
   background-color: white;
   display: grid;
   grid-template: "........." 0.6rem
-                 "title-box" 2rem
+                 "title-box" 2.5rem
                  "........." 1rem
-                 "image-box" 11rem
+                 "image-box" 12rem
                  "........." 1rem
                  "info-box"  31rem
 }
@@ -186,8 +186,8 @@ export default {
 
 .upload-box{
   grid-area: upload-box;
-  height: 10.2rem;
-  width: 10.2rem;
+  height: 10.6rem;
+  width: 10.6rem;
   background-color:black;
   margin-top: 0.5rem;
 }

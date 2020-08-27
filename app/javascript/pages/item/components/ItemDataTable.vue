@@ -180,6 +180,7 @@ export default {
   display: grid;
   grid-template: "... item-search ... select-type... select-color ... select-scene ..."
                 / auto 40% auto 18% auto 18% auto 18% auto;
+  margin: 2rem;
 }
 
 .item-search{
