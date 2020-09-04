@@ -9,7 +9,9 @@ import Vue from 'vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import router from '../router'
+import store from '../store'
 import axios from '../plugins/axios'
+import '../plugins/veevalidate'
 import VModal from '../plugins/vue-js-modal'
 import App from '../app.vue'
 
@@ -22,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
     vuetify,
     router,
+    store,
     VModal,
     render: h => h(App)
   }).$mount()

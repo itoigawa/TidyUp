@@ -4,13 +4,15 @@
   "dependencies": {
     "@rails/webpacker": "5.1.1",
     "axios": "^0.19.2",
+    "vee-validate": "^3.3.9",
     "vue": "^2.6.11",
     "vue-js-modal": "^2.0.0-rc.6",
     "vue-loader": "^15.9.3",
     "vue-router": "^3.3.4",
     "vue-template-compiler": "^2.6.11",
     "vuelidate": "^0.7.5",
-    "vuetify": "^2.3.5"
+    "vuetify": "^2.3.5",
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
     "deepmerge": "^4.2.2",

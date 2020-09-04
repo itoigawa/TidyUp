@@ -7,13 +7,14 @@
     @detail-item="handleShowItemDetailModal"
     />
   <modal name="item-create-modal"
-         :adaptive="true"
-         :resizable="true"
-         :width="700"
-         :height="750"
+         width="70%"
+         height="auto"
+         :scrollable="true"
+         class="modal"
       >
     <ItemCreateModal
       v-if="isVisibleItemCreateModal"
+      @create-item="handleCreateItem"
       />
   </modal>
   <modal name="item-detail-modal"
@@ -44,6 +45,7 @@
 </style>
 
 <script>
+import { mapGetters, mapActions } from "vuex"
 import ItemHeader from './components/ItemHeader'
 import ItemCardsList from './components/ItemCardsList'
 import ItemExhibitButton from './components/ItemExhibitButton'
@@ -70,16 +72,17 @@ export default {
       isVisibleItemDetailModal: false,
       isVisibleItemCardsListModal: false,
       isVisibleItemDataTable: false,
-      // overlay: {
-      //   top: 0,
-      //   left: 0,
-      //   right: 0,
-      //   bottm: 0,
-      //   filter: 'brightness(50%) opacity(60%)'
-      // }
     }
   },
+  computed:{
+    ...mapGetters('items', ['items'])
+  },
   methods: {
+    ...mapActions(
+      'items',
+      [
+        'createItem'
+      ]),
     handleShowItemCreateModal(){
       this.isVisibleItemCreateModal = true;
       this.isVisibleItemDetailModal = false;
@@ -110,6 +113,14 @@ export default {
       this.isVisibleItemCardsListModal = false;
       this.$modal.show('item-data-table-modal');
     },
+    async handleCreateItem(item) {
+      try {
+        await this.createItem(item);
+        this.handleCloseItemCreateModal();
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
   mount (){
     this.show()
@@ -118,14 +129,4 @@ export default {
 </script>
 
 <style scoped>
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
-}
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
-
-.modal-header, .modal-body {
-  padding: 5px 25px;
-}
 </style>

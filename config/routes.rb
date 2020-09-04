@@ -5,5 +5,7 @@ Rails.application.routes.draw do
     resources :sessions
     resources :users
   end
-  get '*path', to: 'home#index'
+  get '*path', to: 'home#index', constraints: lambda { |req|
+    req.path.exclude? 'rails/active_storage'
+  }
 end

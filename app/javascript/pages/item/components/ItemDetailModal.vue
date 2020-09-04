@@ -21,7 +21,7 @@
       return {
         desserts: [
           {
-            name: 'タイプ',
+            name: 'カテゴリー',
             value: 'トップス',
           },
           {

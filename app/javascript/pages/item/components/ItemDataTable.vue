@@ -11,7 +11,7 @@
       class="item-search"
     ></v-text-field>
       <v-select
-        label="タイプ"
+        label="カテゴリー"
         name="type"
         item-text="label"
         item-value="value"
@@ -81,8 +81,8 @@ export default {
           filterable: false,
           value: 'name',
         },
-        { text: '使用回数', value: 'use_times' },
-        { text: 'タイプ', value: 'type' },
+        { text: '使用回数', value: 'count' },
+        { text: 'カテゴリー', value: 'category' },
         { text: '色', value: 'color' },
         { text: 'シーン', value: 'scene' },
         { text: '購入日', value: 'purchase_date' },
@@ -90,7 +90,7 @@ export default {
       desserts: [
         {
           name: 'Frozen Yogurt',
-          use_times: 159,
+          count: 159,
           type: 6.0,
           color: 24,
           scene: 4.0,
@@ -98,7 +98,7 @@ export default {
         },
         {
           name: 'Ice cream sandwich',
-          use_times: 237,
+          count: 237,
           type: 9.0,
           color: 37,
           scene: 4.3,
@@ -106,7 +106,7 @@ export default {
         },
         {
           name: 'Eclair',
-          use_times: 262,
+          count: 262,
           type: 16.0,
           color: 23,
           scene: 6.0,
@@ -114,7 +114,7 @@ export default {
         },
         {
           name: 'Cupcake',
-          use_times: 305,
+          count: 305,
           type: 3.7,
           color: 67,
           scene: 4.3,
@@ -122,7 +122,7 @@ export default {
         },
         {
           name: 'Gingerbread',
-          use_times: 356,
+          count: 356,
           type: 16.0,
           color: 49,
           scene: 3.9,
@@ -130,7 +130,7 @@ export default {
         },
         {
           name: 'Jelly bean',
-          use_times: 375,
+          count: 375,
           type: 0.0,
           color: 94,
           scene: 0.0,
@@ -138,7 +138,7 @@ export default {
         },
         {
           name: 'Lollipop',
-          use_times: 392,
+          count: 392,
           type: 0.2,
           color: 98,
           scene: 0,
@@ -146,7 +146,7 @@ export default {
         },
         {
           name: 'Honeycomb',
-          use_times: 408,
+          count: 408,
           type: 3.2,
           color: 87,
           scene: 6.5,
@@ -154,7 +154,7 @@ export default {
         },
         {
           name: 'Donut',
-          use_times: 452,
+          count: 452,
           type: 25.0,
           color: 51,
           scene: 4.9,
@@ -162,7 +162,7 @@ export default {
         },
         {
           name: 'KitKat',
-          use_times: 518,
+          count: 518,
           type: 26.0,
           color: 65,
           scene: 7,
