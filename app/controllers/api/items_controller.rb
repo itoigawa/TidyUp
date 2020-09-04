@@ -1,13 +1,11 @@
 class Api::ItemsController < ApplicationController
   def index; end
 
-  def new; end
-
   def create
     @item = Item.new(item_params)
 
     if @item.save
-      render json: @item
+      render json: @item, methods: [:image_url]
     else
       render json: @item.errors, status: :bad_request
     end
@@ -20,6 +18,8 @@ class Api::ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:name)
+    params.require(:item).permit(
+      :name, :category, :color, :scene, :count, :purchased_at, :image
+    )
   end
 end

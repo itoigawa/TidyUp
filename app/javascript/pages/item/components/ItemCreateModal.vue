@@ -1,147 +1,209 @@
 <template>
-<div>
+<div id="item-create-modal">
+  <ValidationObserver ref="observer" v-slot="{ handleSubmit }">
   <div class="card">
     <div class="title-box">
-      <div class="title">アイテムの情報を入力</div>
+      <div class="title-name">アイテムの情報を入力</div>
     </div>
-    <div class="image-box">
-      <v-file-input
-        class="file-input"
-        :rules="rules"
-        accept="image/png, image/jpeg, image/bmp"
-        placeholder="画像をアップロード"
-        prepend-icon="mdi-camera"
-      ></v-file-input>
-      <div class="upload-box"></div>
+      <div class="image-box">
+        <div class="file-input">
+          <ValidationProvider v-slot="{ errors }" ref="provider"
+            name="画像" rules="required|image">
+            <v-file-input
+              id="image"
+              :error-messages="errors"
+              label=""
+              placeholder="画像をアップロード"
+              prepend-icon="mdi-camera"
+              @change="handleChange"
+              />
+              <!-- <v-text-field
+                :error-messages="errors"
+                label="画像をアップロード"
+                prepend-icon="mdi-camera"
+                > -->
+                <!-- <label
+                  for="image"
+                >プロフィール画像</label>
+                <input
+                  id="image"
+                  type="file"
+                  @change="handleChange"
+                > -->
+              <!-- </v-text-field> -->
+          </ValidationProvider>
+        </div>
+        <img class="upload-box"
+            v-show="uploadImage"
+            :src="uploadImage"
+            width="200px">
+      </div>
+      <div class="info-box">
+        <div class="info-form">
+          <ValidationProvider v-slot="{ errors }" name="商品名" rules="required|max:10">
+            <v-text-field
+              v-model="item.name"
+              :counter="10"
+              id="name"
+              :error-messages="errors"
+              label="商品名"
+              required
+              dense
+            />
+          <br>
+          </ValidationProvider>
+          <ValidationProvider v-slot="{ errors }" name="カテゴリー" rules="required">
+            <v-select
+              v-model="item.category"
+              :items="categories"
+              item-text="text"
+              item-value="id"       
+              id="category"
+              :error-messages="errors"
+              label="カテゴリー"
+              required
+              dense
+            ></v-select>
+          </ValidationProvider>
+          <br>
+          <ValidationProvider v-slot="{ errors }" name="カラー" rules="required" >
+            <v-select
+              v-model="item.color"
+              :items="colors"
+              item-text="text"
+              item-value="id"
+              id="color"
+              :error-messages="errors"
+              label="色"
+              required
+              dense
+            ></v-select>
+          </ValidationProvider>
+          <br>
+          <ValidationProvider v-slot="{ errors }" name="シーン" rules="required">
+            <v-select
+              v-model="item.scene"
+              :items="scenes"
+              item-text="text"
+              item-value="id"
+              id="scene"
+              :error-messages="errors"
+              label="シーン"
+              required
+              dense
+            ></v-select>
+          </ValidationProvider>
+          <br>
+          <ValidationProvider v-slot="{ errors }" name="着用回数" rules="numeric">
+            <v-text-field
+              v-model="item.count"
+              id="count"
+              :error-messages="errors"
+              label="着用回数の初期値"
+              required
+              dense
+            ></v-text-field>
+          </ValidationProvider>
+          <br>
+          <ValidationProvider v-slot="{ errors }" name="購入日" rules="required">
+            <v-text-field
+              v-model="item.purchased_at"
+              id="purchased_at"
+              :error-messages="errors"
+              label="購入日"
+              required
+              dense
+            >
+              <template v-slot:append-outer>
+                <v-date-picker
+                  v-model="item.purchased_at"
+                  locale="jp-ja"
+                  :day-format="date => new Date(date).getDate()"
+                  :landscape="true"
+                  :width="350"
+                  elevation="10"
+                  required
+                ></v-date-picker>
+              </template>
+            </v-text-field>
+          </ValidationProvider>
+          <br>
+          <v-btn x-large width="100%" color="deep-orange darken-3" right dark  @click="handleSubmit(handleCreateItem)" class="register-btn">登録</v-btn>
+        </div>
+      </div>
     </div>
-    <div class="info-box">
-      <form class="info-form">
-        <v-text-field
-          v-model="name"
-          :error-messages="nameErrors"
-          :counter="10"
-          label="商品名"
-          required
-          @input="$v.name.$touch()"
-          @blur="$v.name.$touch()"
-          dense
-        ></v-text-field>
-        <br>
-        <v-select
-          v-model="select"
-          :items="items"
-          :error-messages="selectErrors"
-          label="タイプ"
-          required
-          @change="$v.select.$touch()"
-          @blur="$v.select.$touch()"
-          dense
-        ></v-select>
-        <br>
-        <v-select
-          v-model="select"
-          :items="items"
-          :error-messages="selectErrors"
-          label="色"
-          required
-          @change="$v.select.$touch()"
-          @blur="$v.select.$touch()"
-          dense
-        ></v-select>
-        <br>
-        <v-select
-          v-model="select"
-          :items="items"
-          :error-messages="selectErrors"
-          label="シーン"
-          required
-          @change="$v.select.$touch()"
-          @blur="$v.select.$touch()"
-          dense
-        ></v-select>
-        <br>
-        <v-select
-          v-model="select"
-          :items="items"
-          :error-messages="selectErrors"
-          label="着用回数の初期値"
-          required
-          @change="$v.select.$touch()"
-          @blur="$v.select.$touch()"
-          dense
-        ></v-select>
-        <br>
-          <v-text-field
-          label="購入日"
-          required
-          dense
-        ></v-text-field>
-        <v-btn x-large width="100%" color="deep-orange darken-3" right dark  @click="submit" class="register-btn">登録</v-btn>
-      </form>
-    </div>
-  </div>
+  </ValidationObserver>
 </div>
 </template>
 
 <script>
-import { validationMixin } from 'vuelidate'
-import { required, maxLength, email } from 'vuelidate/lib/validators'
-
 export default {
-  name: "ItemCreateModal",
-  mixins: [validationMixin],
+  name: 'ItemCreateModal',
 
-  validations: {
-    name: { required, maxLength: maxLength(10) },
-    select: { required },
-    checkbox: {
-      checked (val) {
-        return val
+  data() {
+    return {
+      uploadImage: '',
+      item: {
+        name: '',
+        image: '',
+        category: '',
+        color: '',
+        count: '',
+        purchased_at: ''
       },
-    },
-  },
-
-  data(){
-    return{
-      name: '',
-      select: null,
-      dialog: false,
-      items: [
-        'Item 1',
-        'Item 2',
-        'Item 3',
-        'Item 4',
+      categories: [
+        { id: 1, text: 'トップス' },
+        { id: 2, text: 'アウター' },
+        { id: 3, text: 'パンツ' },
+        { id: 4, text: 'シューズ' }
+      ],
+      colors: [
+        { id: 1, text: 'レッド' },
+        { id: 2, text: 'オレンジ' },
+        { id: 3, text: 'イエロー' },
+        { id: 4, text: 'グリーン' },
+        { id: 5, text: 'ブルー' },
+        { id: 6, text: 'パープル' },
+        { id: 7, text: 'ブラウン' },
+        { id: 8, text: 'ブラック' },
+        { id: 9, text: 'ホワイト' },
+      ],
+      scenes: [
+        { id: 1, text: 'ビジネス' },
+        { id: 2, text: 'プライベート' },
+        { id: 3, text: 'スポーツ' }
       ],
     }
   },
-
-  computed: {
-    selectErrors () {
-      const errors = []
-      if (!this.$v.select.$dirty) return errors
-      !this.$v.select.required && errors.push('タイプを選択して下さい')
-      return errors
-    },
-    nameErrors () {
-      const errors = []
-      if (!this.$v.name.$dirty) return errors
-      !this.$v.name.maxLength && errors.push('10文字以内で商品名を入力してください')
-      !this.$v.name.required && errors.push('商品名を入力してください')
-      return errors
-    }
-  },
-
   methods: {
-    submit () {
-      this.$v.$touch()
+    async handleChange(file) {
+      const { valid } = await this.$refs.provider.validate(file)
+      const pre = new FileReader()
+      pre.readAsDataURL(file)
+      if (valid){
+        pre.addEventListener('load', () => {
+        this.uploadImage = pre.result
+        })
+      }
     },
-    clear () {
-      this.$v.$reset()
-      this.name = ''
-      this.select = null
-      this.checkbox = false
-    },
-  },
+    // created() {
+    //   const formData = new FormData()
+    //   formData.append('item[image]', this.uploadImage)
+    // },
+    // async handleChange(event) {
+    //   const { valid } = await this.$refs.provider.validate(event)
+    //   if (valid) this.uploadImage = event.target.files[0]
+    // },
+    handleCreateItem() {
+      const formData = new FormData()
+      if (this.uploadImage) formData.append('item[image]', this.uploadImage)
+      try {
+        this.$emit('create-item', this.item)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
 }
 </script>
 
@@ -156,7 +218,7 @@ export default {
                  "........." 1rem
                  "image-box" 12rem
                  "........." 1rem
-                 "info-box"  31rem
+                 "info-box"  47rem
 }
 
 .title-box{
@@ -164,7 +226,8 @@ export default {
   border-bottom: 1px solid #eee;
 }
 
-.title{
+.title-name{
+  font-size: 1.25rem;
   font-weight: bold;
   text-align: center;
 }
@@ -186,10 +249,6 @@ export default {
 
 .upload-box{
   grid-area: upload-box;
-  height: 10.6rem;
-  width: 10.6rem;
-  background-color:black;
-  margin-top: 0.5rem;
 }
 
 .info-box{
@@ -206,5 +265,4 @@ export default {
 .register-btn{
   font-weight: bold;
 }
-
 </style>
