@@ -13,6 +13,6 @@ export default {
 <style scoped>
 .text-center{
   text-align: center;
-  margin: 3rem 0;
+  margin: 5rem 0;
 }
 </style>

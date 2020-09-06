@@ -51,4 +51,35 @@ export default {
   color:rgba(245, 245, 245);
   font-size: 4.8rem;
 }
+
+@media screen and (max-width: 1050px){
+  .exhibit_btn {
+  cursor: pointer;
+  bottom: 1.4rem;
+  font-size: 0.95rem;
+  text-decoration: none;
+  height: 7rem;
+  right: 1.4rem;
+  width: 7rem;
+  position: fixed;
+  z-index: 100;
+  background-color:rgba(70,70,70);
+  border-radius: 50%;
+  }
+
+  .icon-field{
+    text-align: center;
+    margin-top: 1rem;
+  }
+
+  .text{
+    color:rgba(245, 245, 245);
+    margin-bottom: 0.45rem;
+  }
+
+  .mdi-hanger::before{
+    color:rgba(245, 245, 245);
+    font-size: 3.6rem;
+  }
+}
 </style>
