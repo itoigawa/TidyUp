@@ -7,9 +7,8 @@
     @detail-item="handleShowItemDetailModal"
     />
   <modal name="item-create-modal"
-         width="70%"
+         :adaptive="true"
          height="auto"
-         :scrollable="true"
          class="modal"
       >
     <ItemCreateModal
@@ -18,18 +17,17 @@
       />
   </modal>
   <modal name="item-detail-modal"
-         :resizable="true"
-         :width="600"
-         :height="750"
+         :adaptive="true"
+         height="auto"
          >
     <ItemDetailModal
       v-if="isVisibleItemDetailModal"
       />
   </modal>
   <modal name="item-data-table-modal"
-         :resizable="true"
-         :width="950"
-         :height="660">
+         height="auto"
+         width="80%"
+         :scrollable="true">
     <ItemDataTable
       v-if="isVisibleItemDataTable"
       />

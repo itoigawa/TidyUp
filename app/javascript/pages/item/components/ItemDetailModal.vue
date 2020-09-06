@@ -57,7 +57,7 @@
                  "... .........  ..." 1rem
                  "... card-image ..." 25rem
                  "... .......... ..." 1rem
-                 "... item-info  ..." 20rem
+                 "... item-info  ..." 17rem
                  / auto 25rem auto
 }
 
@@ -79,6 +79,18 @@
 
 .table-name{
   font-weight: bold;
+}
+
+@media screen and (max-width: 1050px){
+  .card{
+    grid-template: "... .........  ..." 1.5rem
+                   "... item-name  ..." 2rem
+                   "... .........  ..." 1rem
+                   "... card-image ..." 18rem
+                   "... .......... ..." 1rem
+                   "... item-info  ..." 16rem
+                   / auto 18rem auto
+  }
 }
 
 </style>

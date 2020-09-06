@@ -1,7 +1,7 @@
 <template>
 <div>
   <v-card>
-    <div class="search-box">
+    <div class="search-box" v-if="$mq !== 'sm'">
       <v-text-field
       label="商品名"
       v-model="search"
@@ -176,11 +176,11 @@ export default {
 
 <style scoped>
 .search-box{
-  min-width: 100vh;
+  min-width: 60rem;
   display: grid;
   grid-template: "... item-search ... select-type... select-color ... select-scene ..."
                 / auto 40% auto 18% auto 18% auto 18% auto;
-  margin: 2rem;
+  /* margin: 2rem; */
 }
 
 .item-search{

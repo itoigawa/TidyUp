@@ -12,6 +12,7 @@ import router from '../router'
 import store from '../store'
 import axios from '../plugins/axios'
 import '../plugins/veevalidate'
+import '../plugins/vue-mq'
 import VModal from '../plugins/vue-js-modal'
 import App from '../app.vue'
 
