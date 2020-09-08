@@ -31,18 +31,16 @@
         item-value="value"
         :items="[
           { label: '-----', value: null },
-          { label: 'ホワイト', value: 0 },
-          { label: 'ブラック', value: 1 },
-          { label: 'グレー', value: 2 },
-          { label: 'レッド', value: 3 },
-          { label: 'ピンク', value: 4 },
-          { label: 'オレンジ', value: 5 },
-          { label: 'イエロー', value: 6 },
-          { label: 'ブルー', value: 7 },
-          { label: 'パープル', value: 8 },
-          { label: 'クリーム', value: 9 },
-          { label: 'ブラウン', value: 10 },
-          { label: 'その他', value: 11 }
+          { label: 'レッド', value: 1 },
+          { label: 'オレンジ', value: 2 },
+          { label: 'イエロー', value: 3 },
+          { label: 'グリーン', value: 4 },
+          { label: 'ブルー', value: 5 },
+          { label: 'パープル', value: 6 },
+          { label: 'ブラウン', value: 7 },
+          { label: 'ブラック', value: 8 },
+          { label: 'ホワイト', value: 9 },
+          { label: 'その他', value: 10 }
         ]"
         class="select-color"
       ></v-select>
@@ -62,7 +60,7 @@
     </div>
     <v-data-table
       :headers="headers"
-      :items="desserts"
+      :items="items"
       :search="search"
     ></v-data-table>
   </v-card>
@@ -71,6 +69,13 @@
 
 <script>
 export default {
+  name: 'ItemDataTable',
+  props: {
+    items: {
+      type: Array,
+      required: true
+    }
+  },
   data () {
     return {
       search: '',
@@ -85,89 +90,7 @@ export default {
         { text: 'カテゴリー', value: 'category' },
         { text: '色', value: 'color' },
         { text: 'シーン', value: 'scene' },
-        { text: '購入日', value: 'purchase_date' },
-      ],
-      desserts: [
-        {
-          name: 'Frozen Yogurt',
-          count: 159,
-          type: 6.0,
-          color: 24,
-          scene: 4.0,
-          purchase_date: '1%',
-        },
-        {
-          name: 'Ice cream sandwich',
-          count: 237,
-          type: 9.0,
-          color: 37,
-          scene: 4.3,
-          purchase_date: '1%',
-        },
-        {
-          name: 'Eclair',
-          count: 262,
-          type: 16.0,
-          color: 23,
-          scene: 6.0,
-          purchase_date: '7%',
-        },
-        {
-          name: 'Cupcake',
-          count: 305,
-          type: 3.7,
-          color: 67,
-          scene: 4.3,
-          purchase_date: '8%',
-        },
-        {
-          name: 'Gingerbread',
-          count: 356,
-          type: 16.0,
-          color: 49,
-          scene: 3.9,
-          purchase_date: '16%',
-        },
-        {
-          name: 'Jelly bean',
-          count: 375,
-          type: 0.0,
-          color: 94,
-          scene: 0.0,
-          purchase_date: '0%',
-        },
-        {
-          name: 'Lollipop',
-          count: 392,
-          type: 0.2,
-          color: 98,
-          scene: 0,
-          purchase_date: '2%',
-        },
-        {
-          name: 'Honeycomb',
-          count: 408,
-          type: 3.2,
-          color: 87,
-          scene: 6.5,
-          purchase_date: '45%',
-        },
-        {
-          name: 'Donut',
-          count: 452,
-          type: 25.0,
-          color: 51,
-          scene: 4.9,
-          purchase_date: '22%',
-        },
-        {
-          name: 'KitKat',
-          count: 518,
-          type: 26.0,
-          color: 65,
-          scene: 7,
-          purchase_date: '6%',
-        },
+        { text: '購入日', value: 'purchased_at' },
       ],
     }
   },
@@ -180,7 +103,6 @@ export default {
   display: grid;
   grid-template: "... item-search ... select-type... select-color ... select-scene ..."
                 / auto 40% auto 18% auto 18% auto 18% auto;
-  /* margin: 2rem; */
 }
 
 .item-search{

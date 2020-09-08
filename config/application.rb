@@ -38,5 +38,7 @@ module TidyUp
       g.template_engine false
       g.test_framework nil
     end
+
+    config.time_zone = 'Tokyo'
   end
 end

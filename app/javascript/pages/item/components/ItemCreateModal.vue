@@ -128,7 +128,7 @@
               </v-flex>
               <v-spacer></v-spacer>
             </ValidationProvider>
-            <v-btn x-large width="100%" color="deep-orange darken-3" right dark  @click="handleSubmit(handleCreateItem)" class="register-btn">登録</v-btn>
+            <v-btn x-large block color="deep-orange darken-3" right dark  @click="handleSubmit(handleCreateItem)" class="register-btn">登録</v-btn>
           </div>
         </div>
       </div>
@@ -171,6 +171,7 @@ export default {
         { id: 7, text: 'ブラウン' },
         { id: 8, text: 'ブラック' },
         { id: 9, text: 'ホワイト' },
+        { id: 10, text: 'その他' }
       ],
       scenes: [
         { id: 1, text: 'ビジネス' },

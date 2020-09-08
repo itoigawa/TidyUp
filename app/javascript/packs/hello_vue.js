@@ -6,6 +6,7 @@
 // All it does is render <div>Hello Vue</div> at the bottom of the page.
 
 import Vue from 'vue'
+import App from '../app.vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import router from '../router'
@@ -14,7 +15,7 @@ import axios from '../plugins/axios'
 import '../plugins/veevalidate'
 import '../plugins/vue-mq'
 import VModal from '../plugins/vue-js-modal'
-import App from '../app.vue'
+import 'bootstrap/dist/css/bootstrap.css'
 
 Vue.use(Vuetify);
 const vuetify = new Vuetify();
