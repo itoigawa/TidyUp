@@ -3,9 +3,10 @@ class Item < ApplicationRecord
 
   has_one_attached :image
 
-  enum category: { tops: 1, outor: 2, pants: 3, shoes: 4 }
-  enum color: { red: 1, orange: 2, yellow: 3, green: 4, blue: 5, purple: 6, brawn: 7, black: 8, white: 9 }
-  enum scene: { business: 1, everyday: 2, sports: 3 }
+  enum category: { トップス: 1, アウター: 2, パンツ: 3, シューズ: 4 }
+  enum color: { レッド: 1, オレンジ: 2, イエロー: 3, グリーン: 4, ブルー: 5, 
+                パープル: 6, ブラウン: 7, ブラック: 8, ホワイト: 9, その他: 10 }
+  enum scene: { ビジネス: 1, プライベート: 2, スポーツ: 3 }
   
   def image_url
     image.attached? ? Rails.application.routes.url_helpers.rails_blob_path(image, only_path: true) : nil

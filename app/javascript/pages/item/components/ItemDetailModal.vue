@@ -1,13 +1,29 @@
 <template>
-  <div>
+  <div :id="'item-detail-modal' + item.id">
     <div class="card">
-      <div class="item-name">タンクトップ</div>
+      <div class="item-name">{{ item.name }}</div>
       <div class="card-image"></div>
       <v-simple-table height="20rem" class="item-info">
         <tbody>
-          <tr v-for="item in desserts" :key="item.name">
-            <td class="table-name">{{ item.name }}</td>
-            <td class="table-value">{{ item.value }}</td>
+          <tr>
+            <td class="table-name">カテゴリー</td>
+            <td class="table-value">{{ item.category }}</td>
+          </tr>
+          <tr>
+            <td class="table-name">色</td>
+            <td class="table-value">{{ item.color}}</td>
+          </tr>
+          <tr>
+            <td class="table-name">使用回数</td>
+            <td class="table-value">{{ item.count }}</td>
+          </tr>
+          <tr>
+            <td class="table-name">シーン</td>
+            <td class="table-value">{{ item.scene }}</td>
+          </tr>
+          <tr>
+            <td class="table-name">購入日</td>
+            <td class="table-value">{{ item.purchased_at }}</td>
           </tr>
         </tbody>
       </v-simple-table>
@@ -16,31 +32,46 @@
 </template>
 
 <script>
+import TheFooterVue from '../../../components/shared/TheFooter.vue'
   export default {
+    name: 'ItemDetailModal',
+    props: {
+      item: {
+        type: Object,
+        required: true,
+        id: {
+          type: Number,
+          required: true
+        },
+        name: {
+          type: String,
+          required: true
+        },
+        category: {
+          type: String,
+          required: true
+        },
+        color: {
+          type: String,
+          required: true,
+
+        },
+        count: {
+          type: String,
+          required: true
+        },
+        scene: {
+          type: String,
+          required: true
+        },
+        purchased_at: {
+          type: String,
+          required: true
+        }
+      }
+    },
     data () {
       return {
-        desserts: [
-          {
-            name: 'カテゴリー',
-            value: 'トップス',
-          },
-          {
-            name: '色',
-            value: '黒',
-          },
-          {
-            name: '使用回数',
-            value: 4,
-          },
-          {
-            name: 'シーン',
-            value: 'スポーツ',
-          },
-          {
-            name: '購入日',
-            value: '2020/08/15',
-          },
-        ],
       }
     },
   }
@@ -50,6 +81,8 @@
 .card{
   grid-area: card;
   box-shadow: 0 7px 10px 2px rgba(0, 0, 0, 0.08);
+  /* border-radius: 3px;
+  border: 3px solid white; */
   background-color:white;
   display: grid;
   grid-template: "... .........  ..." 1.5rem
@@ -79,6 +112,7 @@
 
 .table-name{
   font-weight: bold;
+  width: 40%;
 }
 
 @media screen and (max-width: 1050px){

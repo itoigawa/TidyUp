@@ -3,14 +3,14 @@
   <ItemHeader
     @data-table="handleShowItemDataTable"
     />
-  <ItemCardsList 
+  <ItemList
     @detail-item="handleShowItemDetailModal"
+    :items="allItems"
     />
   <modal name="item-create-modal"
          :adaptive="true"
          height="auto"
-         class="modal"
-      >
+         >
     <ItemCreateModal
       v-if="isVisibleItemCreateModal"
       @create-item="handleCreateItem"
@@ -22,6 +22,7 @@
          >
     <ItemDetailModal
       v-if="isVisibleItemDetailModal"
+      :item="itemDetail"
       />
   </modal>
   <modal name="item-data-table-modal"
@@ -30,6 +31,7 @@
          :scrollable="true">
     <ItemDataTable
       v-if="isVisibleItemDataTable"
+      :items="allItems"
       />
   </modal>
   <ItemExhibitButton
@@ -45,7 +47,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex"
 import ItemHeader from './components/ItemHeader'
-import ItemCardsList from './components/ItemCardsList'
+import ItemList from './components/ItemList'
 import ItemExhibitButton from './components/ItemExhibitButton'
 import ItemCreateModal from './components/ItemCreateModal'
 import ItemDetailModal from './components/ItemDetailModal'
@@ -57,7 +59,7 @@ export default {
   name: 'ItemIndex',
   components: {
     ItemHeader,
-    ItemCardsList,
+    ItemList,
     ItemExhibitButton,
     ItemCreateModal,
     ItemDetailModal,
@@ -66,48 +68,56 @@ export default {
   },
   data(){
     return {
+      itemDetail: {},
       isVisibleItemCreateModal: false,
       isVisibleItemDetailModal: false,
-      isVisibleItemCardsListModal: false,
+      isVisibleItemListModal: false,
       isVisibleItemDataTable: false,
     }
   },
   computed:{
-    ...mapGetters('items', ['items'])
+    ...mapGetters('items', ['items']),
+    allItems(){
+      return this.items
+    }
+  },
+  created(){
+    this.fetchItems();
   },
   methods: {
     ...mapActions(
       'items',
       [
-        'createItem'
+        'createItem',
+        'fetchItems'
       ]),
     handleShowItemCreateModal(){
       this.isVisibleItemCreateModal = true;
       this.isVisibleItemDetailModal = false;
       this.isVisibleItemCardsListModal = false;
       this.isVisibleItemDataTable = false;
-      this.$modal.show('item-create-modal')
+      this.$modal.show('item-create-modal');
     },
     handleCloseItemCreateModal(){
-      // this.isVisibleItemCreateModal = false;
+      this.isVisibleItemCreateModal = false;
       this.$modal.hide('item-create-modal');
     },
-    handleShowItemDetailModal(){
+    handleShowItemDetailModal(item){
       this.isVisibleItemDetailModal = true;
       this.isVisibleItemCreateModal = false;
       this.isVisibleItemCardsListModal = false;
       this.isVisibleItemDataTable = false;
+      this.itemDetail = item;
       this.$modal.show('item-detail-modal');
     },
-    handleCloseItemDetailModal(){
-      // this.isVisibleItemDetailModal = false;
-      this.$modal.hide('item-create-modal');
-    },
+    // handleCloseItemDetailModal(){
+    //   this.isVisibleItemDetailModal = false;
+    //   this.$modal.hide('item-create-modal');
+    // },
     handleShowItemDataTable(){
       this.isVisibleItemDataTable = true;
-      this.isVisibleItemExhibitButton = true;
-      this.isVisibleItemCreateModal = false;
       this.isVisibleItemDetailModal = false;
+      this.isVisibleItemCreateModal = false;
       this.isVisibleItemCardsListModal = false;
       this.$modal.show('item-data-table-modal');
     },

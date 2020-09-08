@@ -1,5 +1,8 @@
 class Api::ItemsController < ApplicationController
-  def index; end
+  def index
+    @items = Item.all
+    render json: @items
+  end
 
   def create
     @item = Item.new(item_params)

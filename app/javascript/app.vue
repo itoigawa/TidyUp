@@ -15,4 +15,8 @@ body{
 .theme--light.v-application{
   background-color: #f5f5f5;
 }
+
+.v-ripple__container {
+    display:none !important;
+}
 </style>
