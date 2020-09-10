@@ -2,84 +2,94 @@
 <div class="form-wrapper">
   <div class="form-card">
     <div class="register">ユーザー登録</div>
-    <form>
-      <v-text-field
-        v-model="email"
-        :error-messages="emailErrors"
-        label="メールアドレス"
-        required
-        @input="$v.email.$touch()"
-        @blur="$v.email.$touch()"
-      ></v-text-field>
-      <v-text-field
-        v-model="password"
-        :error-messages="passwordErrors"
-        label="パスワード"
-        required
-        @input="$v.password.$touch()"
-        @blur="$v.password.$touch()"
-      ></v-text-field>
-      <v-btn width="16%" color="primary"  @click="submit">登録</v-btn>
-      <v-btn width="16%" color="red" dark @click="clear">消去</v-btn>
-      <div class="login-link">
-        <router-link to="/login">ログインはこちらから</router-link>
-      </div>
-    </form>
+    <ValidationObserver class="form-input" v-slot="{ handleSubmit }">
+      <form>
+        <ValidationProvider
+          name="メールアドレス"
+          rules="required|email"
+          v-slot="{ errors }">
+            <v-text-field
+              id="email"
+              v-model="user.email"
+              :error-messages="errors"
+              label="メールアドレス"
+              required
+            ></v-text-field>
+        </ValidationProvider>
+        <ValidationProvider
+          name="パスワード"
+          rules="required|min:3"
+          v-slot="{ errors }">
+          <v-text-field
+            ref="password"
+            id="password"
+            v-model="user.password"
+            :error-messages="errors"
+            label="パスワード"
+            required
+            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="show1 ? 'text' : 'password'"
+            @click:append="show1 = !show1"
+          ></v-text-field>
+        </ValidationProvider>
+        <ValidationProvider
+          name="パスワード（確認）"
+          rules="required|min:3|"
+          v-slot="{ errors }">
+          <v-text-field
+            id="password_confirmation"
+            v-model="user.password_confirmation"
+            :error-messages="errors"
+            label="パスワード（確認）"
+            required
+            :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="show2 ? 'text' : 'password'"
+            @click:append="show2 = !show2"
+          >
+          </v-text-field>
+        </ValidationProvider>
+        <v-btn type="submit" width="18%" color="primary" @click="handleSubmit(register)">登録</v-btn>
+        <v-btn width="18%" color="red" dark @click="clear">消去</v-btn>
+      </form>
+    </ValidationObserver>
+    <div class="login-link">
+      <router-link to="/login">ログインはこちらから</router-link>
+    </div>
   </div>
 </div>
 </template>
 
 <script>
-import { validationMixin } from 'vuelidate'
-import { required, minLength, email } from 'vuelidate/lib/validators'
-
+import { mapActions } from 'vuex'
 export default {
   name: "RegisterIndex",
-  mixins: [validationMixin],
-
-  validations: {
-    email: { required, email },
-    password: { required, minLength: minLength(3) },
-    checkbox: {
-      checked (val) {
-        return val
-      },
-    },
-  },
-
-  data: () => ({
-    email: '',
-    password: '',
-    select: null,
-    checkbox: false,
-  }),
-
-  computed: {
-    emailErrors () {
-      const errors = []
-      if (!this.$v.email.$dirty) return errors
-      !this.$v.email.email && errors.push('有効なメールアドレスを入力してください')
-      !this.$v.email.required && errors.push('メールアドレスを入力してください')
-      return errors
-    },
-    passwordErrors () {
-      const errors = []
-      if (!this.$v.password.$dirty) return errors
-      !this.$v.password.minLength && errors.push('3文字以上のパスワードを入力してください')
-      !this.$v.password.required && errors.push('パスワードを入力してください')
-      return errors
-    },
+  data() {
+    return {
+        show1: false,
+        show2: false,
+      user: {
+        email: '',
+        password: '',
+        password_confirmation: ''
+      }
+    }
   },
 
   methods: {
-    submit () {
-      this.$v.$touch()
+    register() {
+      this.$axios.post('users', { user: this.user })
+        .then(res => {
+          this.$router.push({ name: 'LoginIndex' })
+        })
+        .catch(err => {
+          console.log(err)
+        })
     },
     clear () {
-      this.$v.$reset()
-      this.email = ''
-      this.password = ''
-      this.checkbox = false
+      this.user.email = ''
+      this.user.password = ''
+      this.user.password_confirmation = ''
+      this.$refs.observer.reset()
     },
   },
 }
@@ -87,22 +97,27 @@ export default {
 
 <style scoped>
 .form-wrapper{
-  min-width: 100vh;
   min-height: 100vh;
   display: grid;
-  grid-template:"....  ........   ...." 15%
-                "....  register   ...." 8%
-                "....  form-card  ...." 54%
-                "....  login-link  ...."  8%
-                "....  .........  ...."  15%
-                / 30%  40% 30%
+  grid-template:"....  ........   ...." auto
+                "....  form-card  ...." 55%      
+                "....  .........  ...." auto
+                /auto  40% auto
 }
 
 .form-card{
+  grid-area: form-card;
+  display: grid;
+  grid-template: "... ..... ............. ..." 11%
+                 "... register register         ..." 12%
+                 "... ..... ............. ..." 2%
+                 "... ..... form-input    ..." 60%
+                 "... ..... ............. ..." 3%
+                 "... ..... login-link ..." 10%
+                 /12%  1%   74%           13%;;
   border-top: 4px solid #18ebfa;
   border-radius: 3px;
   background-color:white ;
-  grid-area: form-card;
   box-shadow: 0 7px 10px 2px rgba(0, 0, 0, 0.08);
 }
 
@@ -111,26 +126,31 @@ export default {
   font-size: 2rem;
   font-weight: bold;
   color: #4d4d4d;
-  margin-top: 3rem;
-  margin-bottom: 1.5rem;
-  margin-left: 4rem;
 }
 
-form{
-  margin-left: 4rem;
-  height: 50%;
-  width: 70%;
+.form-input{
+  grid-area: form-input;
   text-align: center;
 }
 
 .v-btn{
-  margin-top: 2rem;
-  margin-left: 2rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  font-weight: bold;
 }
 
 .login-link{
   grid-area: login-link;
-  margin-top: 2rem;
-  margin-left: 2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+@media screen and (max-width: 1050px) {
+  .form-wrapper{
+    grid-template:"... ......... ..." auto
+                  "... form-card ..." 65%
+                  "... ......... ..." auto
+                  /auto 90% auto
+  }
 }
 </style>

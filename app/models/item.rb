@@ -1,5 +1,12 @@
 class Item < ApplicationRecord
+  belongs_to :user
+
   validates :name, presence: true
+  validates :category, presence: true
+  validates :color, presence: true
+  validates :count, presence: true
+  validates :scene, presence: true
+  validates :purchased_at, presence: true
 
   has_one_attached :image
 

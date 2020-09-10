@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   namespace :api do
     resources :items
     resources :sessions
-    resources :users
+    resources :users do
+      collection do
+        get 'me'
+      end
+    end
   end
   get '*path', to: 'home#index', constraints: lambda { |req|
     req.path.exclude? 'rails/active_storage'
