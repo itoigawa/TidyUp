@@ -1,93 +1,85 @@
 <template>
 <div class="form-wrapper">
   <div class="form-card">
-    <div class="register">ログイン</div>
-    <form>
-      <v-text-field
-        v-model="email"
-        :error-messages="emailErrors"
-        label="メールアドレス"
-        required
-        @input="$v.email.$touch()"
-        @blur="$v.email.$touch()"
-      ></v-text-field>
-      <v-text-field
-        v-model="password"
-        :error-messages="passwordErrors"
-        label="パスワード"
-        required
-        @input="$v.password.$touch()"
-        @blur="$v.password.$touch()"
-      ></v-text-field>
-      <v-btn width="20%" color="primary"  @click="submit">ログイン</v-btn>
-      <v-btn width="16%" color="red" dark @click="clear">消去</v-btn>
-      <div class="test-login">
-        <v-btn color="warning">
-          お試しログイン
-          <v-icon right dark>mdi-account-check</v-icon>
-        </v-btn>
-        <div class="register-link">
-          <router-link to="/users/new">
-            登録はこちらから
-          </router-link>
-      </div>
-      </div>
-    </form>
+    <div class="login">ログイン</div>
+      <ValidationObserver class="form-input" v-slot="{ handleSubmit }">
+        <form>
+        <ValidationProvider
+          name="メールアドレス"
+          rules="required|email"
+          v-slot="{ errors }">
+          <v-text-field
+            v-model="user.email"
+            :error-messages="errors"
+            label="メールアドレス"
+            required
+          ></v-text-field>
+        </ValidationProvider>
+        <ValidationProvider
+          name="パスワード"
+          rules="required|min:3"
+          v-slot="{ errors }">
+          <v-text-field
+            v-model="user.password"
+            :error-messages="errors"
+            label="パスワード"
+            required
+            :append-icon="show3 ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="show3 ? 'text' : 'password'"
+            @click:append="show3 = !show3"
+          ></v-text-field>
+        </ValidationProvider>
+          <v-btn width="22%" color="primary"  @click="handleSubmit(login)">ログイン</v-btn>
+          <v-btn width="18%" color="red" dark @click="clear">消去</v-btn>
+      </form>
+    </ValidationObserver>
+    <div class="test-login">
+      <v-btn color="warning">
+        お試しログイン
+        <v-icon right dark>mdi-account-check</v-icon>
+      </v-btn>
+    </div>
+    <div class="register-link">
+      <router-link to="register">
+        登録はこちらから
+      </router-link>
+    </div>
   </div>
 </div>
 </template>
 
 <script>
-import { validationMixin } from 'vuelidate'
-import { required, minLength, email } from 'vuelidate/lib/validators'
+import { mapActions } from 'vuex'
 
 export default {
   name: "LoginIndex",
-  mixins: [validationMixin],
-
-  validations: {
-    email: { required, email },
-    password: { required, minLength: minLength(3) },
-    checkbox: {
-      checked (val) {
-        return val
-      },
-    },
-  },
-
-  data: () => ({
-    email: '',
-    password: '',
-    select: null,
-    checkbox: false,
-  }),
-
-  computed: {
-    emailErrors () {
-      const errors = []
-      if (!this.$v.email.$dirty) return errors
-      !this.$v.email.email && errors.push('有効なメールアドレスを入力してください')
-      !this.$v.email.required && errors.push('メールアドレスを入力してください')
-      return errors
-    },
-    passwordErrors () {
-      const errors = []
-      if (!this.$v.password.$dirty) return errors
-      !this.$v.password.minLength && errors.push('3文字以上のパスワードを入力してください')
-      !this.$v.password.required && errors.push('パスワードを入力してください')
-      return errors
-    },
+  data() {
+    return {
+      show3: false,
+      user: {
+        email: '',
+        password: '',
+      }
+    }
   },
 
   methods: {
-    submit () {
-      this.$v.$touch()
+    ...mapActions("users", [
+      "loginUser",
+      "fetchUser"
+    ]),
+    async login() {
+      try {
+        await this.loginUser(this.user);
+        this.$router.push({ name: 'ItemIndex' })
+      } catch (error) {
+        console.log(error);
+      }
     },
     clear () {
-      this.$v.$reset()
-      this.email = ''
-      this.password = ''
-      this.checkbox = false
+      this.user.email = ''
+      this.user.password = ''
+      this.$refs.observer.reset()
     },
   },
 }
@@ -95,49 +87,67 @@ export default {
 
 <style scoped>
 .form-wrapper{
-  min-width: 100vh;
   min-height: 100vh;
   display: grid;
-  grid-template:"....  ........   ...." 12%
-                "....  register   ...." 8%
-                ".... form-card     ...." 60%
-                ".... register-link  ...."  8%
-                "....  .........  ...."  12%
-                / 30%  40% 30%
+  grid-template:"....  ............  ...." auto
+                "....  form-card     ...." 55%
+                "....  ............  ...." auto
+                / auto  40% auto
 }
 
 .form-card{
+  grid-area: form-card;
+  display: grid;
+  grid-template: "... ..... ............. ..." 11%
+                 "... login login         ..." 12%
+                 "... ..... ............. ..." 2%
+                 "... ..... form-input    ..." 48%
+                 "... ..... ............. ..." 1%
+                 "... ..... test-login    ..." 12%
+                 "... ..... ............. ..." 2%
+                 "... ..... register-link ..." 12%
+                 /12%  1%   74%           13%;
   border-top: 4px solid#bf0000;;
   border-radius: 3px;
   background-color:white ;
-  grid-area: form-card;
   box-shadow: 0 7px 10px 2px rgba(0, 0, 0, 0.08);
 }
 
-.register{
-  grid-area: register;
+.login{
+  grid-area: login;
   font-size: 2rem;
   font-weight: bold;
   color: #4d4d4d;
-  margin-top: 3rem;
-  margin-bottom: 1.5rem;
-  margin-left: 4rem;
 }
 
-form{
-  margin-left: 4rem;
-  height: 50%;
-  width: 70%;
+.form-input{
+  grid-area: form-input;
   text-align: center;
 }
 
 .v-btn{
-  margin-top: 2rem;
-  margin-left: 2rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  font-weight: bold;
+}
+
+.test-login{
+  grid-area: test-login;
+  text-align: center;
 }
 
 .register-link{
-  margin-top: 1.7rem;
-  margin-left: 2rem;
+  grid-area: register-link;
+  text-align: center;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 1050px) {
+  .form-wrapper{
+    grid-template:"... ......... ..." auto
+                  "... form-card ..." 65%
+                  "... ......... ..." auto
+                  /auto 90% auto
+  }
 }
 </style>

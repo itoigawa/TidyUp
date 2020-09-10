@@ -1,4 +1,4 @@
-<template>
+<template v-if="isAuthUserItem">
 <div>
   <ItemHeader
     @data-table="handleShowItemDataTable"
@@ -79,6 +79,9 @@ export default {
     ...mapGetters('items', ['items']),
     allItems(){
       return this.items
+    },
+    isAuthUserItem() {
+      return this.item.user_id === this.authUser.id
     }
   },
   created(){

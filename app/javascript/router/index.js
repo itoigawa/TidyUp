@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '../store'
+
 import ItemIndex from '../pages/item/index'
 import RegisterIndex from '../pages/register/index'
 import LoginIndex from '../pages/login/index'
@@ -12,7 +14,8 @@ const router = new Router({
     {
       path: '/items',
       component: ItemIndex,
-      name: 'ItemIndex'
+      name: 'ItemIndex',
+      meta: { requiredAuth: true },
     },
     {
       path: "/register",
@@ -26,5 +29,15 @@ const router = new Router({
     },
   ],
 })
+
+router.beforeEach((to, from, next) => {
+  store.dispatch('users/fetchAuthUser').then((authUser) => {
+    if (to.matched.some(record => record.meta.requiredAuth) && !authUser) {
+      next({ name: 'LoginIndex' });
+    } else {
+      next();
+    }
+  })
+});
 
 export default router

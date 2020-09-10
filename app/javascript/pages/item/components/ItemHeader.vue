@@ -13,8 +13,6 @@
         ></v-img>
       </template>
 
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
       <v-toolbar-title>TidyUp</v-toolbar-title>
 
       <v-spacer></v-spacer>
@@ -56,11 +54,14 @@
         </template>
 
         <v-list>
-          <v-list-item
-            v-for="(item, i) in items"
-            :key="i"
-          >
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          <v-list-item>
+            <v-icon>mdi-logout</v-icon>
+            <router-link
+              to="#"
+              @click.native="handleLogout"
+              class="logout-link"
+              >Logout
+            </router-link>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -85,24 +86,37 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
-  data: () => ({
-    items: [
-      { title: 'Click Me' },
-      { title: 'Click Me' },
-      { title: 'Click Me' },
-      { title: 'Click Me 2' },
-    ],
-  }),
+  name: 'ItemHeader',
   methods: {
+    ...mapActions("users", ["logoutUser"]),
+    async handleLogout() {
+      try {
+        await this.logoutUser()
+        this.$router.push({name: 'LoginIndex'})
+      } catch (error) {
+        console.log(error)
+      }
+    },
     handleDataTable(){
       this.$emit('data-table')
-    }
+    },
   }
 }
 </script>
 
 <style scoped>
+.v-toolbar__title{
+  margin-left: 1rem;
+}
+
+.logout-link{
+  text-decoration: none;
+  color: black;
+}
+
 .icon{
   text-decoration: none;
   color: white;

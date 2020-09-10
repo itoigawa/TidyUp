@@ -1,11 +1,12 @@
 class Api::ItemsController < ApplicationController
+  before_action :authenticate!
   def index
-    @items = Item.all
+    @items = current_user.items.all
     render json: @items
   end
 
   def create
-    @item = Item.new(item_params)
+    @item = current_user.items.build(item_params)
 
     if @item.save
       render json: @item, methods: [:image_url]
@@ -15,7 +16,7 @@ class Api::ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
+    @item = current_user.items.find(params[:id])
   end
 
   private
