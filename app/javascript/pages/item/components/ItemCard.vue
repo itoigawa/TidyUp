@@ -2,9 +2,10 @@
 <div class="col-sm-12 col-lg-4 mb-3">
   <div
     class="card"
-    :id="'item-' + item.id"
-    @click="handleDetailItem(item)">
-    <img src="assets/sample_wear.png" class="card-image">
+    :id="'item-' + item.id">
+    <img src="assets/sample_wear.png" 
+         class="card-image"
+         @click="handleDetailItem(item)">
     <div class="card-box">
       <h3 class="card-title">{{ item.name }}</h3>
       <div class="card-icons">

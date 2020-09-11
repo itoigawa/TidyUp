@@ -25,13 +25,10 @@
         <v-icon>mdi-calendar-month-outline</v-icon>
       </v-btn>
 
-      <v-btn icon>
-        <div 
-          class="icon"
-          @click="handleDataTable"
-          >
+      <v-btn icon
+             class="icon"
+             @click="handleDataTable">
           <v-icon>mdi-archive-outline</v-icon>
-        </div>
       </v-btn>
 
       <v-btn icon>
