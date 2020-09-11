@@ -60,7 +60,7 @@ export default {
   grid-template:
     "... .......... ... .......... ..." auto
     "... card-title ... card-icons ..." 85%
-    / 5% 55% 7% 30% auto;
+    / 5% 70% auto 25% 1%;
 }
 
 .card-title {
@@ -83,7 +83,7 @@ export default {
   .card-box{
     grid-template:
       "... card-title ... card-icons ..." 97%
-      / auto 57% auto 27% auto;
+      / auto 70% auto 24% 1%;
   }
 }
 </style>

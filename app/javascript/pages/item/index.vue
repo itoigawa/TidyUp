@@ -2,11 +2,42 @@
 <div>
   <ItemHeader
     @data-table="handleShowItemDataTable"
+    @all-items-list="handleShowAllItemsList"
+    @all-tops-list="handleShowAllTopsList"
+    @all-outor-list="handleShowAllOutorList"
+    @all-pants-list="handleShowAllPantsList"
+    @all-shoes-list="handleShowAllShoesList"
     />
-  <ItemList
-    @detail-item="handleShowItemDetailModal"
-    :items="allItems"
-    />
+  <template v-if="isVisibleAllItems">
+    <ItemList
+      @detail-item="handleShowItemDetailModal"
+      :items="allItems"
+      />
+  </template>
+  <template  v-if="isVisibleAllTops">
+    <ItemList
+      @detail-item="handleShowItemDetailModal"
+      :items="allTops"
+      />
+  </template>
+  <template v-if="isVisibleAllOutor">
+    <ItemList
+      @detail-item="handleShowItemDetailModal"
+      :items="allOutor"
+      />
+  </template>
+  <template v-if="isVisibleAllPants">
+    <ItemList
+      @detail-item="handleShowItemDetailModal"
+      :items="allPants"
+      />
+  </template>
+  <template v-if="isVisibleAllShoes">
+    <ItemList
+      @detail-item="handleShowItemDetailModal"
+      :items="ollShoes"
+      /> 
+  </template>
   <modal name="item-create-modal"
          :adaptive="true"
          height="auto"
@@ -71,14 +102,38 @@ export default {
       itemDetail: {},
       isVisibleItemCreateModal: false,
       isVisibleItemDetailModal: false,
-      isVisibleItemListModal: false,
       isVisibleItemDataTable: false,
+      isVisibleAllItems: true,
+      isVisibleAllTops: false,
+      isVisibleAllOutor: false,
+      isVisibleAllPants: false,
+      isVisibleAllShoes: false
     }
   },
   computed:{
     ...mapGetters('items', ['items']),
     allItems(){
       return this.items
+    },
+    allTops(){
+      return this.items.filter(item => {
+        return item.category == 'トップス'
+      })
+    },
+    allOutor(){
+      return this.items.filter(item => {
+        return item.category == 'アウター'
+      })
+    },
+    allPants(){
+      return this.items.filter(item => {
+        return item.category == 'パンツ'
+      })
+    },
+    allShoes(){
+      return this.items.filter(item => {
+        return item.category == 'シューズ'
+      })
     },
     isAuthUserItem() {
       return this.item.user_id === this.authUser.id
@@ -97,7 +152,6 @@ export default {
     handleShowItemCreateModal(){
       this.isVisibleItemCreateModal = true;
       this.isVisibleItemDetailModal = false;
-      this.isVisibleItemCardsListModal = false;
       this.isVisibleItemDataTable = false;
       this.$modal.show('item-create-modal');
     },
@@ -106,9 +160,8 @@ export default {
       this.$modal.hide('item-create-modal');
     },
     handleShowItemDetailModal(item){
-      this.isVisibleItemDetailModal = true;
       this.isVisibleItemCreateModal = false;
-      this.isVisibleItemCardsListModal = false;
+      this.isVisibleItemDetailModal = true;
       this.isVisibleItemDataTable = false;
       this.itemDetail = item;
       this.$modal.show('item-detail-modal');
@@ -118,11 +171,45 @@ export default {
     //   this.$modal.hide('item-create-modal');
     // },
     handleShowItemDataTable(){
-      this.isVisibleItemDataTable = true;
-      this.isVisibleItemDetailModal = false;
       this.isVisibleItemCreateModal = false;
-      this.isVisibleItemCardsListModal = false;
+      this.isVisibleItemDetailModal = false;
+      this.isVisibleItemDataTable = true;
       this.$modal.show('item-data-table-modal');
+    },
+    handleShowAllItemsList(){
+      this.isVisibleAllItems = true;
+      this.isVisibleAllTops = false;
+      this.isVisibleAllOutor = false;
+      this.isVisibleAllPants = false;
+      this.isVisibleAllShoes = false;
+    },
+    handleShowAllTopsList(){
+      this.isVisibleAllItems = false;
+      this.isVisibleAllTops = true;
+      this.isVisibleAllOutor = false;
+      this.isVisibleAllPants = false;
+      this.isVisibleAllShoes = false;
+    },
+    handleShowAllOutorList(){
+      this.isVisibleAllItems = false;
+      this.isVisibleAllTops = false;
+      this.isVisibleAllOutor = true;
+      this.isVisibleAllPants = false;
+      this.isVisibleAllShoes = false;
+    },
+    handleShowAllPantsList(){
+      this.isVisibleAllItems = false;
+      this.isVisibleAllTops = false;
+      this.isVisibleAllOutor = false;
+      this.isVisibleAllPants = true;
+      this.isVisibleAllShoes = false;
+    },
+    handleShowAllShoesList(){
+      this.isVisibleAllItems = false;
+      this.isVisibleAllTops = false;
+      this.isVisibleAllOutor = false;
+      this.isVisibleAllPants = false;
+      this.isVisibleAllShoes = true;
     },
     async handleCreateItem(item) {
       try {

@@ -4,7 +4,7 @@
   @click="handleCreateItem">
   <div class="icon-field">
     <div class="text">登録</div>
-      <v-icon>mdi-hanger</v-icon>
+    <v-icon>mdi-hanger</v-icon>
   </div>
 </div>
 </template>
@@ -54,9 +54,7 @@ export default {
   color:rgba(245, 245, 245);
 }
 
-
-
-.mdi-hanger{
+.mdi:before, .mdi-set{
   color:rgba(245, 245, 245);
   font-size: 4.8rem;
 }
@@ -76,8 +74,6 @@ export default {
   border-radius: 50%;
   }
 
-
-
   .icon-field{
     text-align: center;
     margin-top: 1rem;
@@ -87,7 +83,7 @@ export default {
     color:rgba(245, 245, 245);
   }
 
-  .mdi-hanger{
+  .mdi:before, .mdi-set{
     color:rgba(245, 245, 245);
     font-size: 3.6rem;
   }

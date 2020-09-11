@@ -7,27 +7,24 @@
 
 import Vue from 'vue'
 import App from '../app.vue'
-import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
 import router from '../router'
 import store from '../store'
 import axios from '../plugins/axios'
+import vuetify from '../plugins/vuetify'
 import '../plugins/veevalidate'
 import '../plugins/vue-mq'
-import VModal from '../plugins/vue-js-modal'
+import '../plugins/vue-js-modal'
 import 'bootstrap/dist/css/bootstrap.css'
 
-Vue.use(Vuetify);
-const vuetify = new Vuetify();
+
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
-    vuetify,
     router,
     store,
-    VModal,
+    vuetify,
     render: h => h(App)
   }).$mount()
   document.body.appendChild(app.$el)

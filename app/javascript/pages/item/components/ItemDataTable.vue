@@ -1,32 +1,20 @@
 <template>
 <div>
   <v-card>
-    <div class="search-box" v-if="$mq !== 'sm'">
+    <div class="search-box">
       <v-text-field
       label="商品名"
-      v-model="search"
+      name="name"
+      v-model="searchItem"
       prepend-inner-icon="mdi-magnify"
       single-line
       hide-details
       class="item-search"
-    ></v-text-field>
-      <v-select
-        label="カテゴリー"
-        name="type"
-        item-text="label"
-        item-value="value"
-        :items="[
-          { label: '-', value: null },
-          { label: 'トップス', value: 0 },
-          { label: 'アウター', value: 1 },
-          { label: 'パンツ', value: 2 },
-          { label: 'シューズ', value: 3 }
-        ]"
-        class="select-type"
-      ></v-select>
-      <v-select
+      ></v-text-field>
+      <!-- <v-select
         label="色"
-        name="is_open"
+        name="color"
+        v-model="item.color"
         item-text="label"
         item-value="value"
         :items="[
@@ -43,10 +31,12 @@
           { label: 'その他', value: 10 }
         ]"
         class="select-color"
+        @change="loadlist"
       ></v-select>
       <v-select
         label="シーン"
-        name="is_open"
+        name="scene"
+        v-model="item.scene"
         item-text="label"
         item-value="value"
         :items="[
@@ -56,13 +46,32 @@
           { label: 'スポーツ', value: 2 }
         ]"
         class="select-scene"
-      ></v-select>
+        @change="loadlist"
+      ></v-select> -->
     </div>
     <v-data-table
       :headers="headers"
       :items="items"
-      :search="search"
-    ></v-data-table>
+      :search="searchItem"
+      locale="ja-jp"
+      no-data-text="データがありません。"
+    >
+      <!-- <template v-slot:[`item.name`]="{ item }">
+        {{ item.name }}
+      </template>
+      <template v-slot:[`item.category`]="{ item }">
+        {{ item.category }}
+      </template>
+      <template v-slot:[`item.color`]="{ item }">
+        {{ item.color }}
+      </template>
+      <template v-slot:[`item.scene`]="{ item }">
+        {{ item.scene }}
+      </template>
+      <template v-slot:[`item.purchased`]="{ item }">
+        {{ item.purchased_at }}
+      </template> -->
+    </v-data-table>
   </v-card>
 </div>
 </template>
@@ -78,19 +87,14 @@ export default {
   },
   data () {
     return {
-      search: '',
+      searchItem: '',
       headers: [
-        {
-          text: '商品名',
-          align: 'start',
-          filterable: false,
-          value: 'name',
-        },
-        { text: '使用回数', value: 'count' },
-        { text: 'カテゴリー', value: 'category' },
-        { text: '色', value: 'color' },
-        { text: 'シーン', value: 'scene' },
-        { text: '購入日', value: 'purchased_at' },
+        { text: '商品名', value: 'name', sortable: false},
+        { text: 'カテゴリー', value: 'category', sortable: false },
+        { text: '色', value: 'color', sortable: false },
+        { text: '使用回数', value: 'count', sortable: false },
+        { text: 'シーン', value: 'scene', sortable: false },
+        { text: '購入日', value: 'purchased_at', sortable: false },
       ],
     }
   },
@@ -101,8 +105,8 @@ export default {
 .search-box{
   min-width: 60rem;
   display: grid;
-  grid-template: "... item-search ... select-type... select-color ... select-scene ..."
-                / auto 40% auto 18% auto 18% auto 18% auto;
+  grid-template: "... item-search ... select-color ... select-scene ..."
+                / 2% 35% auto 18% auto 18% auto;
 }
 
 .item-search{
@@ -119,5 +123,11 @@ export default {
 
 .select-scene{
   grid-area: select-scene;
+}
+
+@media screen and (max-width: 1050px){
+.search-box{
+  min-width: 4rem;
+}
 }
 </style>

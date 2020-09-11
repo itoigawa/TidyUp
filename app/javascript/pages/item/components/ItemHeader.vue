@@ -68,11 +68,11 @@
 
       <template v-slot:extension>
         <v-tabs align-with-title>
-          <v-tab>全て</v-tab>
-          <v-tab>トップス</v-tab>
-          <v-tab>アウター</v-tab>
-          <v-tab>パンツ</v-tab>
-          <v-tab>シューズ</v-tab>
+          <v-tab @click="handleAllItemsList">全て</v-tab>
+          <v-tab @click="handleAllTopsList">トップス</v-tab>
+          <v-tab @click="handleAllOutorList">アウター</v-tab>
+          <v-tab @click="handleAllPantsList">パンツ</v-tab>
+          <v-tab @click="handleAllShoesList">シューズ</v-tab>
         </v-tabs>
       </template>
     </v-app-bar>
@@ -103,6 +103,21 @@ export default {
     handleDataTable(){
       this.$emit('data-table')
     },
+    handleAllItemsList(){
+      this.$emit('all-items-list')
+    },
+    handleAllTopsList(){
+      this.$emit('all-tops-list')
+    },
+    handleAllOutorList(){
+      this.$emit('all-outor-list')
+    },
+    handleAllPantsList(){
+      this.$emit('all-pants-list')
+    },
+    handleAllShoesList(){
+      this.$emit('all-shoes-list')
+    }
   }
 }
 </script>

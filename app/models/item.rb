@@ -1,7 +1,7 @@
 class Item < ApplicationRecord
   belongs_to :user
 
-  validates :name, presence: true
+  validates :name, presence: true, length: { maximum: 14 } 
   validates :category, presence: true
   validates :color, presence: true
   validates :count, presence: true

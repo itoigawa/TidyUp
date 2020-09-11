@@ -35,15 +35,15 @@
             </ValidationProvider>
           </div>
           <img class="upload-box"
-              v-show="uploadImage"
-              :src="uploadImage">
+               v-show="uploadImage"
+               :src="uploadImage">
         </div>
         <div class="info-box">
           <div class="info-form">
-            <ValidationProvider class="name" v-slot="{ errors }" name="商品名" rules="required|max:10">
+            <ValidationProvider class="name" v-slot="{ errors }" name="商品名" rules="required|max:14">
               <v-text-field
                 v-model="item.name"
-                :counter="10"
+                :counter="14"
                 id="name"
                 :error-messages="errors"
                 label="商品名"
@@ -181,9 +181,6 @@ export default {
     }
   },
   methods: {
-    // handleShowDatePicker(){
-    //   this.$modal.show('date-picker')
-    // },
     async handleChange(file) {
       const { valid } = await this.$refs.provider.validate(file)
       const pre = new FileReader()
@@ -242,8 +239,8 @@ export default {
 .image-box{
   grid-area: image-box;
   display: grid;
-  grid-template:"... file-input ... upload-box ..."
-                /22% 30% 5% 50% auto;
+  grid-template:"... file-input ... upload-box"
+                /15% 30% 10% 55%;
   position: relative;
   border-bottom: 1px solid #eee;
 }
@@ -256,7 +253,9 @@ export default {
 
 .upload-box{
   grid-area: upload-box;
-  width: 200px
+  position: absolute;
+  bottom: 1rem;
+  width: 150px
 }
 
 .info-box{
@@ -280,7 +279,7 @@ export default {
                 "    count   " 3rem
                 "............" 1rem
                 "purchased-at" 3rem
-                "............" 1rem
+                "............" 1.6rem
                 "register-btn" 3rem
 }
 
@@ -356,7 +355,7 @@ export default {
 
   .upload-box{
     grid-area: upload-box;
-    width: 120px;
+    width: 90px;
   }
 }
 </style>
