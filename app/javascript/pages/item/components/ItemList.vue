@@ -7,7 +7,10 @@
           <ItemCard
             :key="item.id"
             :item="item"
-            @detail-item="$listeners['detail-item']" 
+            @detail-item="$listeners['detail-item']"
+            @add-count-item="$listeners['add-count-item']"
+            @show-editModal="$listeners['show-editModal']" 
+            @delete-item="$listeners['delete-item']"
             />
         </template>
       </div>
@@ -19,6 +22,7 @@
 
 <script>
 import ItemCard from './ItemCard'
+
 export default {
   name: 'ItemList',
   components: {

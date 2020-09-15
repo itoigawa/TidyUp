@@ -1,7 +1,8 @@
 import axios from '../../plugins/axios';
 
 const state = {
-  items: []
+  items: [],
+  events: null
 }
 
 const getters = {
@@ -14,7 +15,24 @@ const mutations = {
   },
   addItem: (state, item) => {
     state.items.push(item)
-  }
+  },
+  addCount: (state, addCountItem) => {
+    const countItem = state.items.find((item) => 
+      item.id == addCountItem.id
+    )
+    countItem.count++
+  },
+  updateItem: (state, updateItem) => {
+    const index = state.items.findIndex(item => {
+      return item.id == updateItem.id
+    })
+    state.items.splice(index, 1, updateItem)
+  },
+  deleteItem: (state, deleteItem) => {
+    state.items = state.items.filter(item => {
+      return item.id != deleteItem.id
+    })
+  },
 }
 
 const actions = {
@@ -25,10 +43,28 @@ const actions = {
       })
       .catch(err => console.log(err.response));
   },
-  createItem({ commit }, item) {
-    return axios.post('items', item)
+  createItem({ commit }, formData) {
+    return axios.post('items', formData)
       .then(res => {
         commit('addItem', res.data)
+      })
+  },
+  addCountItem({ commit }, item) {
+    return axios.patch(`items/${item.id}`, item)
+      .then(res => {
+        commit('addCount', res.data)
+      })
+  },
+  updateItem({ commit }, formData) {
+    return axios.patch(`items/${formData.id}`, formData)
+      .then(res => {
+        commit('updateItem', res.data)
+      })
+  },
+  deleteItem({ commit }, item) {
+    return axios.delete(`items/${item.id}`)
+      .then(res => {
+        commit('deleteItem', res.data)
       })
   },
 }

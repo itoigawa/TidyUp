@@ -1,8 +1,17 @@
 <template>
   <div :id="'item-detail-modal' + item.id">
     <div class="card">
+      <v-btn 
+        icon
+        class="close-btn"
+        @click="handleCloseModal">
+        <v-icon small>mdi-close</v-icon>
+      </v-btn>
       <div class="item-name">{{ item.name }}</div>
-      <div class="card-image"></div>
+        <v-img :src="item.image_url"
+                class="card-image"
+                height="390"
+                contain />
       <v-simple-table height="20rem" class="item-info">
         <tbody>
           <tr>
@@ -54,10 +63,9 @@ import TheFooterVue from '../../../components/shared/TheFooter.vue'
         color: {
           type: String,
           required: true,
-
         },
         count: {
-          type: String,
+          type: Number,
           required: true
         },
         scene: {
@@ -70,10 +78,11 @@ import TheFooterVue from '../../../components/shared/TheFooter.vue'
         }
       }
     },
-    data () {
-      return {
+    methods: {
+      handleCloseModal(){
+        this.$emit('close-modal')
       }
-    },
+    }
   }
 </script>
 
@@ -81,17 +90,15 @@ import TheFooterVue from '../../../components/shared/TheFooter.vue'
 .card{
   grid-area: card;
   box-shadow: 0 7px 10px 2px rgba(0, 0, 0, 0.08);
-  /* border-radius: 3px;
-  border: 3px solid white; */
   background-color:white;
   display: grid;
-  grid-template: "... .........  ..." 1.5rem
+  grid-template: "... .........  close-btn" 1.5rem
                  "... item-name  ..." 2rem
                  "... .........  ..." 1rem
                  "... card-image ..." 25rem
                  "... .......... ..." 1rem
                  "... item-info  ..." 17rem
-                 / auto 25rem auto
+                 / auto 25rem 6.2rem
 }
 
 .item-name{
@@ -101,9 +108,17 @@ import TheFooterVue from '../../../components/shared/TheFooter.vue'
   font-weight: bold;
 }
 
+.close-btn{
+  grid-area: close-btn;
+}
+
+.v-btn{
+  text-align: right;
+}
+
 .card-image{
   grid-area: card-image;
-  background-color: black;
+  text-align: center;
 }
 
 .item-info{
@@ -112,12 +127,11 @@ import TheFooterVue from '../../../components/shared/TheFooter.vue'
 
 .table-name{
   font-weight: bold;
-  width: 40%;
 }
 
 @media screen and (max-width: 1050px){
   .card{
-    grid-template: "... .........  ..." 1.5rem
+    grid-template: "... .........  close-btn" 1.5rem
                    "... item-name  ..." 2rem
                    "... .........  ..." 1rem
                    "... card-image ..." 18rem

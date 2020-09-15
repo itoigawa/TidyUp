@@ -1,5 +1,5 @@
 <template>
-<div>
+<div :id="'item-edit-modal-' + item.id">
   <div class="wrapper">
     <ValidationObserver ref="observer" v-slot="{ handleSubmit }">
     <div class="card">
@@ -17,7 +17,7 @@
         <div class="image-box">
           <div class="file-input">
             <ValidationProvider v-slot="{ errors }" ref="provider"
-              name="画像" rules="required|image">
+              name="画像" rules="image">
               <v-file-input
                 id="image"
                 :error-messages="errors"
@@ -28,11 +28,18 @@
                 />
             </ValidationProvider>
           </div>
-          <v-img v-show="previewImage"
+          <v-img v-if="previewImage"
                  :src="previewImage"
                  height="130"
                  width="130"
-                 class="upload-box" />
+                 class="upload-box"
+                 />
+          <v-img v-else
+                 :src="item.image_url"
+                 height="130"
+                 width="130"
+                 class="upload-box"
+                 />
         </div>
         <div class="info-box">
           <div class="info-form">
@@ -124,7 +131,7 @@
               </v-flex>
               <v-spacer></v-spacer>
             </ValidationProvider>
-            <v-btn x-large block color="deep-orange darken-3" right dark  @click="handleSubmit(handleCreateItem)" class="register-btn">登録</v-btn>
+            <v-btn x-large block color="green darken-1" right dark  @click="handleSubmit(handleUpdateItem)" class="register-btn">更新</v-btn>
           </div>
         </div>
       </div>
@@ -136,21 +143,43 @@
 
 <script>
 export default {
-  name: 'ItemCreateModal',
+  name: 'ItemEditModal',
+  props: {
+    item: {
+      type: Object,
+      required: true,
+      name: {
+        type: String,
+        required: true
+      },
+      category: {
+        type: String,
+        required: true
+      },
+      color: {
+        type: String,
+        required: true
+      },
+      count: {
+        type: Number,
+        required: true
+      },
+      scene: {
+        type: String,
+        required: true
+      },
+      purchased_at: {
+        type: String,
+        required: true
+      }
+    }
+  },
   data() {
     return {
       date: new Date().toISOString().substr(0, 10),
       menu: false,
       previewImage: '',
       uploadImage: '',
-      item: {
-        name: '',
-        image_url: '',
-        category: '',
-        color: '',
-        count: '',
-        purchased_at: ''
-      },
       categories: [
         'トップス',
         'アウター',
@@ -187,8 +216,9 @@ export default {
         this.previewImage = pre.result
       }
     },
-    handleCreateItem() {
+    handleUpdateItem() {
       const formData = new FormData()
+      formData.append('item[id]', this.item.id)
       formData.append('item[name]', this.item.name)
       formData.append('item[category]', this.item.category)
       formData.append('item[color]', this.item.color)
@@ -197,7 +227,7 @@ export default {
       formData.append('item[purchased_at]', this.item.purchased_at)
       if (this.uploadImage) formData.append('item[image]', this.uploadImage)
       try {
-        this.$emit('create-item', formData)
+        this.$emit('update-item', formData)
       } catch (error) {
         console.log(error);
       }
@@ -260,7 +290,6 @@ export default {
   grid-area: upload-box;
   position: absolute;
   bottom: 1rem;
-  width: 150px
 }
 
 .info-box{
@@ -360,7 +389,6 @@ export default {
 
   .upload-box{
     grid-area: upload-box;
-    width: 90px;
   }
 }
 </style>

@@ -11,6 +11,12 @@
       hide-details
       class="item-search"
       ></v-text-field>
+      <v-btn
+        icon
+        class="close-btn"
+        @click="handleCloseModal">
+        <v-icon small>mdi-close</v-icon>
+      </v-btn>
       <!-- <v-select
         label="色"
         name="color"
@@ -78,7 +84,7 @@
 
 <script>
 export default {
-  name: 'ItemDataTable',
+  name: 'ItemDataTableModal',
   props: {
     items: {
       type: Array,
@@ -98,6 +104,11 @@ export default {
       ],
     }
   },
+  methods: {
+    handleCloseModal(){
+      this.$emit('close-modal');
+    }
+  }
 }
 </script>
 
@@ -105,12 +116,16 @@ export default {
 .search-box{
   min-width: 60rem;
   display: grid;
-  grid-template: "... item-search ... select-color ... select-scene ..."
-                / 2% 35% auto 18% auto 18% auto;
+  grid-template: "... item-search ... close-btn ..."
+                / 2% 35% auto 3% 1%;
 }
 
 .item-search{
   grid-area: item-search;
+}
+
+.close-btn{
+  grid-area: close-btn;
 }
 
 .select-type{
@@ -128,6 +143,8 @@ export default {
 @media screen and (max-width: 1050px){
 .search-box{
   min-width: 4rem;
+  grid-template: "... item-search ... close-btn ..."
+              / 2% 40% auto 8% 3%;
 }
 }
 </style>

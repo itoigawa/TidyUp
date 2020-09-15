@@ -1,8 +1,14 @@
 class Api::ItemsController < ApplicationController
   before_action :authenticate!
+  before_action :set_item, only: %i[show destroy]
+
   def index
     @items = current_user.items.all
-    render json: @items
+    render json: @items, methods: [:image_url]
+  end
+
+  def show
+    render json: @item, methods: [:image_url]
   end
 
   def create
@@ -15,11 +21,26 @@ class Api::ItemsController < ApplicationController
     end
   end
 
-  def show
-    @item = current_user.items.find(params[:id])
+  def update
+    item = Item.find(params[:item][:id])
+
+    if item.update(item_params)
+      render json: item, methods: [:image_url]
+    else
+      render json: item.errors, status: :bad_request
+    end
+  end
+
+  def destroy
+    @item.destroy!
+    render json: @item
   end
 
   private
+
+  def set_item
+    @item = Item.find(params[:id])
+  end
 
   def item_params
     params.require(:item).permit(

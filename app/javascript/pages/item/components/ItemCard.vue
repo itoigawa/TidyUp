@@ -3,17 +3,34 @@
   <div
     class="card"
     :id="'item-' + item.id">
-    <img src="assets/sample_wear.png" 
-         class="card-image"
-         @click="handleDetailItem(item)">
+    <v-img class="card-image grey lighten-3"
+           :src="item.image_url"
+           @click="handleDetailItem(item)"
+           height="343"
+           contain />
     <div class="card-box">
       <h3 class="card-title">{{ item.name }}</h3>
       <div class="card-icons">
-        <v-btn icon>
-          <v-icon>mdi-pencil</v-icon>
+        <v-btn 
+          icon
+          small
+          @click="handleAddCountItem(item)"
+          >
+          <v-icon color="blue-grey darken-1">mdi-tshirt-crew-outline</v-icon>
         </v-btn>
-        <v-btn icon>
-          <v-icon>mdi-delete</v-icon>
+        <v-btn
+          icon
+          small
+          @click="handleShowItemEditModal"
+          >
+          <v-icon color="blue-grey darken-1">mdi-pencil</v-icon>
+        </v-btn>
+        <v-btn
+          icon
+          small
+          @click="handleDeleteItem"
+          >
+          <v-icon color="blue-grey darken-1">mdi-delete</v-icon>
         </v-btn>
       </div>
     </div>
@@ -22,18 +39,64 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex"
+
 export default {
   name: 'ItemCard',
   props: {
     item: {
       type: Object,
-      required: true
-    }
+      required: true,
+      id: {
+        type: Number,
+        required: true
+      },
+      name: {
+        type: String,
+        required: true
+      },
+      category: {
+        type: String,
+        required: true
+      },
+      color: {
+        type: String,
+        required: true
+      },
+      count: {
+        type: Number,
+        requried: true
+      },
+      scene: {
+        type: Number,
+        required: true
+      },
+      purchased_at: {
+        type :String,
+        required: true
+      },
+      user_id: {
+        type: Number,
+        required: true
+      }
+    },
+  },
+  computed:{
+    ...mapGetters('items', ['items']),
   },
   methods: {
     handleDetailItem(item) {
-      this.$emit('detail-item', item)
-    }
+      this.$emit('detail-item', this.item)
+    },
+    handleAddCountItem(item) {
+      this.$emit('add-count-item', this.item)
+    },
+    handleShowItemEditModal() {
+      this.$emit('show-editModal', this.item)
+    },
+    handleDeleteItem() {
+      this.$emit('delete-item', this.item)
+    },
   }
 }
 </script>
@@ -52,22 +115,21 @@ export default {
 
 .card-image {
   grid-area: card-image;
-  width: 100%;
 }
 
 .card-box{
   display: grid;
   grid-area: card-box;
   grid-template:
-    "... .......... ... .......... ..." auto
-    "... card-title ... card-icons ..." 85%
-    / 5% 70% auto 25% 1%;
+    "... .......... ... .........." auto
+    "... card-title ... card-icons" 85%
+    / auto 71% auto 28%;
 }
 
 .card-title {
   grid-area: card-title;
   font-weight: 550;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
 }
 
 .card-icons{
@@ -83,8 +145,8 @@ export default {
 
   .card-box{
     grid-template:
-      "... card-title ... card-icons ..." 97%
-      / auto 70% auto 24% 1%;
+      "... card-title ... card-icons" 97%
+      / auto 70% auto 28%;
   }
 }
 </style>
