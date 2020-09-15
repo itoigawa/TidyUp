@@ -18,14 +18,14 @@ const router = new Router({
       meta: { requiredAuth: true },
     },
     {
-      path: "/register",
+      path: '/register',
       component: RegisterIndex,
-      name: "RegisterIndex",
+      name: 'RegisterIndex',
     },
     {
-      path: "/login",
+      path: '/login',
       component: LoginIndex,
-      name: "LoginIndex",
+      name: 'LoginIndex',
     },
   ],
 })

@@ -12,10 +12,9 @@ import store from '../store'
 import axios from '../plugins/axios'
 import vuetify from '../plugins/vuetify'
 import '../plugins/veevalidate'
-import '../plugins/vue-mq'
+// import '../plugins/fullcalendar'
 import '../plugins/vue-js-modal'
 import 'bootstrap/dist/css/bootstrap.css'
-
 
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios

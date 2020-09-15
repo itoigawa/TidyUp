@@ -17,11 +17,9 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <v-icon>mdi-wardrobe-outline</v-icon>
-      </v-btn>
-
-      <v-btn icon>
+      <v-btn icon
+             class="icon"
+             @click="handleCalendar">
         <v-icon>mdi-calendar-month-outline</v-icon>
       </v-btn>
 
@@ -99,6 +97,9 @@ export default {
     },
     handleDataTable(){
       this.$emit('data-table')
+    },
+    handleCalendar(){
+      this.$emit('calendar')
     },
     handleAllItemsList(){
       this.$emit('all-items-list')
