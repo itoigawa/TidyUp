@@ -18,7 +18,7 @@
         </ValidationProvider>
         <ValidationProvider
           name="パスワード"
-          rules="required|min:3"
+          rules="required|min:8"
           v-slot="{ errors }">
           <v-text-field
             ref="password"
@@ -34,7 +34,7 @@
         </ValidationProvider>
         <ValidationProvider
           name="パスワード（確認）"
-          rules="required|min:3|"
+          rules="required|min:8"
           v-slot="{ errors }">
           <v-text-field
             id="password_confirmation"

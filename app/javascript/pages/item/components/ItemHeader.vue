@@ -4,7 +4,7 @@
       color="#aaacb5"
       dark
       prominent
-      src="/assets/header_image.png"
+      src="/assets/headerImage.png"
     >
       <template v-slot:img="{ props }">
         <v-img
@@ -29,7 +29,9 @@
           <v-icon>mdi-archive-outline</v-icon>
       </v-btn>
 
-      <v-btn icon>
+      <v-btn icon
+             class="icon"
+             @click="handleTodayWeather">
         <v-icon>mdi-weather-partly-cloudy</v-icon>
       </v-btn>
 
@@ -100,6 +102,9 @@ export default {
     },
     handleCalendar(){
       this.$emit('calendar')
+    },
+    handleTodayWeather(){
+      this.$emit('today-weather')
     },
     handleAllItemsList(){
       this.$emit('all-items-list')

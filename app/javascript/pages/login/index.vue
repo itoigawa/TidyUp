@@ -17,7 +17,7 @@
         </ValidationProvider>
         <ValidationProvider
           name="パスワード"
-          rules="required|min:3"
+          rules="required|min:8"
           v-slot="{ errors }">
           <v-text-field
             v-model="user.password"
@@ -34,7 +34,7 @@
       </form>
     </ValidationObserver>
     <div class="test-login">
-      <v-btn color="warning">
+      <v-btn color="warning" @click="testLogin">
         お試しログイン
         <v-icon right dark>mdi-account-check</v-icon>
       </v-btn>
@@ -70,6 +70,16 @@ export default {
     ]),
     async login() {
       try {
+        await this.loginUser(this.user);
+        this.$router.push({ name: 'ItemIndex' })
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async testLogin() {
+      try {
+        this.user.email = 'test@example.com'
+        this.user.password = 'TestPassword'
         await this.loginUser(this.user);
         this.$router.push({ name: 'ItemIndex' })
       } catch (error) {

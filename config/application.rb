@@ -40,5 +40,11 @@ module TidyUp
     end
 
     config.time_zone = 'Tokyo'
+
+    # config.action_dispatch.default_headers = {
+    #   'Access-Control-Allow-Credentials' => 'true',
+    #   'Access-Control-Allow-Origin' => 'http://localhost:8080', # アクセス元のURL
+    #   'Access-Control-Request-Method' => '*' # 許可するメソッド（GET,POST,DELETEなど）：'*'は全てのメソッドという意味
+    # }
   end
 end

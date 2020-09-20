@@ -131,10 +131,9 @@ import TheFooterVue from '../../../components/shared/TheFooter.vue'
 
 @media screen and (max-width: 1050px){
   .card{
-    grid-template: "... .........  close-btn" 1.5rem
-                   "... item-name  ..." 2rem
-                   "... .........  ..." 1rem
-                   "... card-image ..." 18rem
+    grid-template: "... .........  close-btn" 1rem
+                   "... item-name  ..." 1rem
+                   "... card-image ..." 21rem
                    "... .......... ..." 1rem
                    "... item-info  ..." 16rem
                    / auto 18rem auto
