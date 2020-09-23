@@ -25,7 +25,8 @@
 
       <v-btn icon
              class="icon"
-             @click="handleDataTable">
+             @click="handleDataTable"
+             id="item-data-table">
           <v-icon>mdi-archive-outline</v-icon>
       </v-btn>
 
@@ -41,6 +42,7 @@
       >
         <template v-slot:activator="{ on, attrs }">
           <v-btn
+            id="menu"
             icon
             color="yellow"
             v-bind="attrs"
@@ -65,11 +67,11 @@
 
       <template v-slot:extension>
         <v-tabs align-with-title>
-          <v-tab @click="handleAllItemsList">全て</v-tab>
-          <v-tab @click="handleAllTopsList">トップス</v-tab>
-          <v-tab @click="handleAllOutorList">アウター</v-tab>
-          <v-tab @click="handleAllPantsList">パンツ</v-tab>
-          <v-tab @click="handleAllShoesList">シューズ</v-tab>
+          <v-tab @click="handleAllItemsList" id="all">全て</v-tab>
+          <v-tab @click="handleAllTopsList" id="tops">トップス</v-tab>
+          <v-tab @click="handleAllOutorList" id="outor">アウター</v-tab>
+          <v-tab @click="handleAllPantsList" id="pants">パンツ</v-tab>
+          <v-tab @click="handleAllShoesList" id="shoes">シューズ</v-tab>
         </v-tabs>
       </template>
     </v-app-bar>

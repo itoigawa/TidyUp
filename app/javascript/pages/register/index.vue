@@ -1,5 +1,5 @@
 <template>
-<div class="form-wrapper">
+<div id="register-form" class="form-wrapper">
   <div class="form-card">
     <div class="register">ユーザー登録</div>
     <ValidationObserver class="form-input" v-slot="{ handleSubmit }">

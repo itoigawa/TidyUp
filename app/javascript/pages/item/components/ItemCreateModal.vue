@@ -1,5 +1,5 @@
 <template>
-<div>
+<div id="item-create-modal">
   <div class="wrapper">
     <ValidationObserver ref="observer" v-slot="{ handleSubmit }">
     <div class="card">
@@ -86,7 +86,7 @@
                 dense
               ></v-select>
             </ValidationProvider>
-            <ValidationProvider class="count" v-slot="{ errors }" name="着用回数" rules="numeric">
+            <ValidationProvider class="count" v-slot="{ errors }" name="着用回数" rules="required|numeric">
               <v-text-field
                 v-model="item.count"
                 id="count"
@@ -107,11 +107,13 @@
                   <template v-slot:activator="{ on }">
                     <v-text-field
                       v-model="item.purchased_at"
+                      id="purchased_at"
                       :error-messages="errors"
                       label="購入日"
                       prepend-icon="mdi-calendar"
                       readonly
                       v-on="on"
+                      required
                     ></v-text-field>
                   </template>
                   <v-date-picker 

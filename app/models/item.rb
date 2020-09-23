@@ -18,4 +18,8 @@ class Item < ApplicationRecord
   def image_url
     image.attached? ? Rails.application.routes.url_helpers.rails_blob_path(image, only_path: true) : nil
   end
+
+  scope :search, ->(term){
+    where('LOWER(name) LIKE ?', "%#{term}%")
+  }
 end

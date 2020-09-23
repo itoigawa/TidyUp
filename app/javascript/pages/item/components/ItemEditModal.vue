@@ -93,7 +93,7 @@
                 dense
               ></v-select>
             </ValidationProvider>
-            <ValidationProvider class="count" v-slot="{ errors }" name="着用回数" rules="numeric">
+            <ValidationProvider class="count" v-slot="{ errors }" name="着用回数" rules="required|numeric">
               <v-text-field
                 v-model="item.count"
                 id="count"
