@@ -1,5 +1,5 @@
 <template>
-  <div :id="'item-detail-modal' + item.id">
+  <div :id="'item-detail-modal-' + item.id">
     <div class="card">
       <v-btn 
         icon

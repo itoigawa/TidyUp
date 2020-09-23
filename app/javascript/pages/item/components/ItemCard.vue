@@ -4,6 +4,7 @@
     class="card"
     :id="'item-' + item.id">
     <v-img class="card-image grey lighten-3"
+           :id="'item-image-' + item.id"
            :src="item.image_url"
            @click="handleDetailItem(item)"
            height="343"
@@ -22,6 +23,7 @@
           icon
           small
           @click="handleShowItemEditModal"
+          :id="'item-edit-' + item.id"
           >
           <v-icon color="blue-grey darken-1">mdi-pencil</v-icon>
         </v-btn>
@@ -29,6 +31,7 @@
           icon
           small
           @click="handleDeleteItem"
+          :id="'item-delete-' + item.id"
           >
           <v-icon color="blue-grey darken-1">mdi-delete</v-icon>
         </v-btn>

@@ -1,5 +1,5 @@
 <template>
-<div class="form-wrapper">
+<div id="login-form" class="form-wrapper">
   <div class="form-card">
     <div class="login">ログイン</div>
       <ValidationObserver class="form-input" v-slot="{ handleSubmit }">
@@ -9,6 +9,7 @@
           rules="required|email"
           v-slot="{ errors }">
           <v-text-field
+            id="email"
             v-model="user.email"
             :error-messages="errors"
             label="メールアドレス"
@@ -20,6 +21,7 @@
           rules="required|min:8"
           v-slot="{ errors }">
           <v-text-field
+            id="password"
             v-model="user.password"
             :error-messages="errors"
             label="パスワード"

@@ -37,7 +37,7 @@ extend('image', {
 
 extend('numeric', {
   ...numeric,
-  message: '{_field_}は半角数値で入力してください'
+  message: '{_field_}は半角数字で入力してください'
 });
 
 extend('min', {
