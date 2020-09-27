@@ -91,8 +91,11 @@ export default {
     handleDetailItem(item) {
       this.$emit('detail-item', this.item)
     },
-    handleAddCountItem(item) {
-      this.$emit('add-count-item', this.item)
+    // handleAddCountItem(item) {
+    //   this.$emit('add-count-item', this.item)
+    // },
+    handleAddCountItem(item){
+      this.item.count++
     },
     handleShowItemEditModal() {
       this.$emit('show-editModal', this.item)

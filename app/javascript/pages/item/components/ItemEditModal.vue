@@ -148,6 +148,10 @@ export default {
     item: {
       type: Object,
       required: true,
+      id: {
+        type: Number,
+        required: true
+      },
       name: {
         type: String,
         required: true
@@ -218,6 +222,7 @@ export default {
     },
     handleUpdateItem() {
       const formData = new FormData()
+      formData.append('id', 1)
       formData.append('item[id]', this.item.id)
       formData.append('item[name]', this.item.name)
       formData.append('item[category]', this.item.category)

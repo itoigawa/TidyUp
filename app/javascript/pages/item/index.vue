@@ -103,7 +103,7 @@
   </modal>
   <modal name="today-weather-modal"
          :adaptive="true"
-         :minHeight= 450>
+         :minHeight= 400>
     <TodayWeatherModal
       v-if="isVisibleTodayWeatherModal"
       @close-modal="handleCloseTodayWeatherModal"
