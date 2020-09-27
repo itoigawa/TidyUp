@@ -22,7 +22,8 @@ class Api::ItemsController < ApplicationController
   end
 
   def update
-    item = Item.find(params[:item][:id])
+    # item = Item.find(params[:item][:id])
+    item = Item.find(params[:id])
 
     if item.update(item_params)
       render json: item, methods: [:image_url]
