@@ -1,10 +1,10 @@
 class Item < ApplicationRecord
   belongs_to :user
+  has_many :wearing_times, dependent: :destroy
 
   validates :name, presence: true, length: { maximum: 10 }
   validates :category, presence: true
   validates :color, presence: true
-  validates :count, presence: true
   validates :scene, presence: true
   validates :purchased_at, presence: true
 
@@ -19,7 +19,5 @@ class Item < ApplicationRecord
     image.attached? ? Rails.application.routes.url_helpers.rails_blob_path(image, only_path: true) : nil
   end
 
-  scope :search, ->(term){
-    where('LOWER(name) LIKE ?', "%#{term}%")
-  }
+  scope :search, ->(term) { where('LOWER(name) LIKE ?', "%#{term}%") }
 end

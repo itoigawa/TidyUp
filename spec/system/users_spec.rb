@@ -44,8 +44,8 @@ RSpec.describe "ユーザー機能", type: :system do
   it 'ユーザー登録フォームでバリデーションが機能していること' do
     visit '/register'
     within '#register-form' do
-      # fill_in 'email', with: ''
-      # expect(page).to have_content('メールアドレスは必須項目です'), '必須チェックのバリデーションエラーが表示されていません'
+      fill_in 'email', with: ' '
+      expect(page).to have_content('メールアドレスは必須項目です'), '必須チェックのバリデーションエラーが表示されていません'
       fill_in 'email', with: 'password'
       expect(page).to have_content('メールアドレスの形式で入力してください'), 'フォーマットのバリデーションエラーが表示されていません'
       fill_in 'password', with: ''

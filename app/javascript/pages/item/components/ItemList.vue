@@ -8,7 +8,7 @@
             :key="item.id"
             :item="item"
             @detail-item="$listeners['detail-item']"
-            @add-count-item="$listeners['add-count-item']"
+            @item-addCount="$listeners['item-addCount']"
             @show-editModal="$listeners['show-editModal']" 
             @delete-item="$listeners['delete-item']"
             />

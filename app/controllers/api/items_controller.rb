@@ -22,8 +22,7 @@ class Api::ItemsController < ApplicationController
   end
 
   def update
-    # item = Item.find(params[:item][:id])
-    item = Item.find(params[:id])
+    item = Item.find(params[:item][:id])
 
     if item.update(item_params)
       render json: item, methods: [:image_url]
@@ -40,12 +39,12 @@ class Api::ItemsController < ApplicationController
   private
 
   def set_item
-    @item = Item.find(params[:id])
+    @item = current_user.items.find(params[:id])
   end
 
   def item_params
     params.require(:item).permit(
-      :name, :category, :color, :scene, :count, :purchased_at, :image
+      :name, :category, :color, :scene, :purchased_at, :image
     )
   end
 end
