@@ -15,7 +15,7 @@
         <v-btn 
           icon
           small
-          @click="handleAddCountItem(item)"
+          @click="handleAddCountItem"
           >
           <v-icon color="blue-grey darken-1">mdi-tshirt-crew-outline</v-icon>
         </v-btn>
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex"
+import { mapGetters } from "vuex";
 
 export default {
   name: 'ItemCard',
@@ -66,10 +66,6 @@ export default {
         type: String,
         required: true
       },
-      count: {
-        type: Number,
-        requried: true
-      },
       scene: {
         type: Number,
         required: true
@@ -91,11 +87,8 @@ export default {
     handleDetailItem(item) {
       this.$emit('detail-item', this.item)
     },
-    // handleAddCountItem(item) {
-    //   this.$emit('add-count-item', this.item)
-    // },
-    handleAddCountItem(item){
-      this.item.count++
+    handleAddCountItem() {
+      this.$emit('item-addCount', this.item)
     },
     handleShowItemEditModal() {
       this.$emit('show-editModal', this.item)

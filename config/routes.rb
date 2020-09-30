@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root 'home#index'
   namespace :api do
-    resources :items
+    resources :items do
+      resources :wearing_times, only: %i[index create]
+    end
     resources :sessions
     resources :users do
       collection do

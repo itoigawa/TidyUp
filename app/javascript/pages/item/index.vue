@@ -13,7 +13,7 @@
   <template v-if="isVisibleAllItems">
     <ItemList
       @detail-item="handleShowItemDetailModal"
-      @add-count-item="handleAddCountItem"
+      @item-addCount="handleAddCountItem"
       @show-editModal="handleShowItemEditModal"
       @delete-item="handleDeleteItem"
       :items="allItems"
@@ -22,7 +22,7 @@
   <template  v-if="isVisibleAllTops">
     <ItemList
       @detail-item="handleShowItemDetailModal"
-      @add-count-item="handleAddCountItem"
+      @item-addCount="handleAddCountItem"
       @show-editModal="handleShowItemEditModal"
       @delete-item="handleDeleteItem"
       :items="allTops"
@@ -31,7 +31,7 @@
   <template v-if="isVisibleAllOutor">
     <ItemList
       @detail-item="handleShowItemDetailModal"
-      @add-count-item="handleAddCountItem"
+      @item-addCount="handleAddCountItem"
       @show-editModal="handleShowItemEditModal"
       @delete-item="handleDeleteItem"
       :items="allOutor"
@@ -40,7 +40,7 @@
   <template v-if="isVisibleAllPants">
     <ItemList
       @detail-item="handleShowItemDetailModal"
-      @add-count-item="handleAddCountItem"
+      @item-addCount="handleAddCountItem"
       @show-editModal="handleShowItemEditModal"
       @delete-item="handleDeleteItem"
       :items="allPants"
@@ -49,7 +49,7 @@
   <template v-if="isVisibleAllShoes">
     <ItemList
       @detail-item="handleShowItemDetailModal"
-      @add-count-item="handleAddCountItem"
+      @item-addCount="handleAddCountItem"
       @show-editModal="handleShowItemEditModal"
       @delete-item="handleDeleteItem"
       :items="allShoes"
@@ -120,6 +120,7 @@
 </style>
 
 <script>
+import axios from '../../plugins/axios';
 import { mapGetters, mapActions } from "vuex"
 import ItemHeader from './components/ItemHeader'
 import ItemList from './components/ItemList'
@@ -202,7 +203,6 @@ export default {
       [
         'fetchItems',
         'createItem',
-        'addCountItem', 
         'updateItem',
         'deleteItem'
       ]),
@@ -330,16 +330,6 @@ export default {
         console.log(error);
       }
     },
-    async handleAddCountItem(item){
-      const addItem = confirm("今日着用しますか？");
-      try{
-        if( addItem == true ) {
-          await this.addCountItem(item);
-        }
-      } catch (error){
-        console.log(error);
-      }
-    },
     async handleUpdateItem(formData) {
       try{
         await this.updateItem(formData);
@@ -348,12 +338,21 @@ export default {
         console.log(error);
       }
     },
+    async handleAddCountItem(item) {
+      const AddCountItem = confirm('今日、アイテムを着用しますか？');
+      try{
+        if( AddCountItem == true ){
+          axios.post(`items/${item.id}/wearing_times`, item)
+        } 
+      } catch (error) {
+        console.log(error);
+      }
+    },
     async handleDeleteItem(item) {
-      const deleteItem = confirm("アイテムを削除しますか？");
+      const deleteItem = confirm('アイテムを削除しますか？');
       try{
         if( deleteItem == true ) {
           await this.deleteItem(item);
-          this.handleCloseItemEditModal();
         }
       } catch (error) {
         console.log(error);

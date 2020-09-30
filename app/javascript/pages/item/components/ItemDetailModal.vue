@@ -23,10 +23,6 @@
             <td class="table-value">{{ item.color}}</td>
           </tr>
           <tr>
-            <td class="table-name">使用回数</td>
-            <td class="table-value">{{ item.count }}</td>
-          </tr>
-          <tr>
             <td class="table-name">シーン</td>
             <td class="table-value">{{ item.scene }}</td>
           </tr>
@@ -64,10 +60,6 @@ import TheFooterVue from '../../../components/shared/TheFooter.vue'
           type: String,
           required: true,
         },
-        count: {
-          type: Number,
-          required: true
-        },
         scene: {
           type: String,
           required: true
@@ -97,7 +89,7 @@ import TheFooterVue from '../../../components/shared/TheFooter.vue'
                  "... .........  ..." 1rem
                  "... card-image ..." 25rem
                  "... .......... ..." 1rem
-                 "... item-info  ..." 17rem
+                 "... item-info  ..." 13.6rem
                  / auto 25rem 6.2rem
 }
 
@@ -135,7 +127,7 @@ import TheFooterVue from '../../../components/shared/TheFooter.vue'
                    "... item-name  ..." 1rem
                    "... card-image ..." 21rem
                    "... .......... ..." 1rem
-                   "... item-info  ..." 16rem
+                   "... item-info  ..." 12.8rem
                    / auto 18rem auto
   }
 }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_09_040940) do
+ActiveRecord::Schema.define(version: 2020_09_27_075947) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 2020_09_09_040940) do
     t.integer "category", default: 1, null: false
     t.integer "color", default: 1, null: false
     t.integer "scene", default: 1, null: false
-    t.integer "count", default: 0, null: false
     t.string "purchased_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -55,6 +54,18 @@ ActiveRecord::Schema.define(version: 2020_09_09_040940) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "wearing_times", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "count", default: 0, null: false
+    t.bigint "user_id"
+    t.bigint "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_wearing_times_on_item_id"
+    t.index ["user_id"], name: "index_wearing_times_on_user_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "items", "users"
+  add_foreign_key "wearing_times", "items"
+  add_foreign_key "wearing_times", "users"
 end

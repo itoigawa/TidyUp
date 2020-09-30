@@ -93,16 +93,6 @@
                 dense
               ></v-select>
             </ValidationProvider>
-            <ValidationProvider class="count" v-slot="{ errors }" name="着用回数" rules="required|numeric">
-              <v-text-field
-                v-model="item.count"
-                id="count"
-                :error-messages="errors"
-                label="着用回数の初期値"
-                required
-                dense
-              ></v-text-field>
-            </ValidationProvider>
             <ValidationProvider class="purchased-at" v-slot="{ errors }" name="購入日" rules="required">
               <v-flex xs12 sm6 md4>
                 <v-menu
@@ -164,10 +154,6 @@ export default {
         type: String,
         required: true
       },
-      count: {
-        type: Number,
-        required: true
-      },
       scene: {
         type: String,
         required: true
@@ -227,7 +213,6 @@ export default {
       formData.append('item[name]', this.item.name)
       formData.append('item[category]', this.item.category)
       formData.append('item[color]', this.item.color)
-      formData.append('item[count]', this.item.count)
       formData.append('item[scene]', this.item.scene)
       formData.append('item[purchased_at]', this.item.purchased_at)
       if (this.uploadImage) formData.append('item[image]', this.uploadImage)
@@ -254,7 +239,7 @@ export default {
                  "........." 1rem
                  "image-box" 12rem
                  "........." 1rem
-                 "info-box"  29rem
+                 "info-box"  25rem
 }
 
 .title-box{
@@ -315,8 +300,6 @@ export default {
                 "............" 1rem
                 "    scene   " 3rem
                 "............" 1rem
-                "    count   " 3rem
-                "............" 1rem
                 "purchased-at" 3rem
                 "............" 1.6rem
                 "register-btn" 3rem
@@ -336,10 +319,6 @@ export default {
 
 .scene{
   grid-area: scene;
-}
-
-.count{
-  grid-area: count;
 }
 
 .purchased-at{
@@ -362,7 +341,7 @@ export default {
                   "........." 1rem
                   "image-box" 8rem
                   "........." 1rem
-                  "info-box"  25.4rem
+                  "info-box"  22.4rem
   }
 
   .info-box{
@@ -379,7 +358,6 @@ export default {
                   "............" 0.6rem
                   "    scene   " 3rem
                   "............" 0.6rem
-                  "    count   " 3rem
                   "purchased-at" 3rem
                   "............" 0.8rem
                   "register-btn" 2.5rem

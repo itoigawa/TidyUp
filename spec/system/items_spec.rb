@@ -28,10 +28,6 @@ RSpec.describe "Items", type: :system do
       expect(page).to have_content('商品名は必須項目です'), '必須チェックのバリデーションエラーが表示されていません'
       fill_in 'name', with: 'a' * 11
       expect(page).to have_content('商品名は10文字以下で入力してください'), '文字数チェックのバリデーションエラーが表示されていません'
-      fill_in 'count', with: ' '
-      expect(page).to have_content('着用回数は必須項目です'), '必須チェックのバリデーションエラーが表示されていません'
-      fill_in 'count', with: '１'
-      expect(page).to have_content('着用回数は半角数字で入力してください'), '半角数字のバリデーションエラーが表示されていません'
       click_on '登録'
       expect(page).to have_content('カテゴリーは必須項目です'), '必須チェックのバリデーションエラーが表示されていません'
       expect(page).to have_content('カラーは必須項目です'), '必須チェックのバリデーションエラーが表示されていません'
@@ -48,19 +44,9 @@ RSpec.describe "Items", type: :system do
       expect(page).to have_content('商品名は必須項目です'), '必須チェックのバリデーションエラーが表示されていません'
       fill_in 'name', with: 'a' * 11
       expect(page).to have_content('商品名は10文字以下で入力してください'), '文字数チェックのバリデーションエラーが表示されていません'
-      fill_in 'count', with: ' '
-      expect(page).to have_content('着用回数は必須項目です'), '必須チェックのバリデーションエラーが表示されていません'
-      fill_in 'count', with: '１'
-      expect(page).to have_content('着用回数は半角数字で入力してください'), '半角数字のバリデーションエラーが表示されていません'
       click_on '更新'
     end
     expect(page).to have_selector("#item-edit-modal-#{item.id}"), 'バリデーションエラーが発生しているときに画面遷移してはいけません'
-  end
-
-  it 'アイテムの写真をクリックするとアイテム詳細モーダルが表示されている' do
-    item = create(:item, user: user)
-    find("#item-image-#{item.id}").click
-    expect(page).to have_selector("#item-detail-modal-#{item.id}"), 'アイテム詳細モーダルが表示されていません'
   end
 
   it 'ヘッダーのカテゴリーで選択したアイテムが表示されている' do
@@ -82,6 +68,15 @@ RSpec.describe "Items", type: :system do
     find('#shoes').click
     expect(page).to have_content('シューズ'), '追加したアイテム(シューズ)が表示されていません'
   end
+
+  it 'アイテムの写真をクリックするとアイテム詳細モーダルが表示されている' do
+    item = create(:item, user: user)
+    find("#item-image-#{item.id}").click
+    expect(page).to have_selector("#item-detail-modal-#{item.id}"), 'アイテム詳細モーダルが表示されていません'
+  end
+  
+  # it 'カードの着用ボタンを押すと着用回数が増える' do
+  # end
 
   it 'カードの削除ボタンを押すとアイテムが削除される' do
     item = create(:item, user: user)

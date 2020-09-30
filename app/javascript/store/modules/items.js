@@ -1,8 +1,7 @@
 import axios from '../../plugins/axios';
 
 const state = {
-  items: [],
-  events: null
+  items: []
 }
 
 const getters = {
@@ -15,12 +14,6 @@ const mutations = {
   },
   addItem: (state, item) => {
     state.items.push(item)
-  },
-  addCount: (state, addCountItem) => {
-    const countItem = state.items.find((item) => 
-      item.id == addCountItem.id
-    )
-    countItem.count++
   },
   updateItem: (state, updateItem) => {
     const index = state.items.findIndex(item => {
@@ -47,12 +40,6 @@ const actions = {
     return axios.post('items', formData)
       .then(res => {
         commit('addItem', res.data)
-      })
-  },
-  addCountItem({ commit }, item) {
-    return axios.patch(`items/${item.id}`, item)
-      .then(res => {
-        commit('addCount', res.data)
       })
   },
   updateItem({ commit }, formData) {

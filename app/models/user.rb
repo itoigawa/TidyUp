@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :items, dependent: :destroy
+  has_many :wearing_times, dependent: :destroy
 
   include JwtToken
   authenticates_with_sorcery!
