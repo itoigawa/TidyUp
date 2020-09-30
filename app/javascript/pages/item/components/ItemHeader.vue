@@ -20,7 +20,7 @@
       <v-btn icon
              class="icon"
              @click="handleCalendar">
-        <v-icon>mdi-calendar-month-outline</v-icon>
+        <v-icon>mdi-delete-clock-outline</v-icon>
       </v-btn>
 
       <v-btn icon
