@@ -1,40 +1,36 @@
 <template>
-<div class="col-sm-12 col-lg-4 mb-3">
-  <div
-    class="card"
-    :id="'item-' + item.id">
-    <v-img class="card-image grey lighten-3"
-           :id="'item-image-' + item.id"
-           :src="item.image_url"
-           @click="handleDetailItem(item)"
-           height="343"
-           contain />
-    <div class="card-box">
-      <h3 class="card-title">{{ item.name }}</h3>
-      <div class="card-icons">
-        <v-btn 
-          icon
-          small
-          @click="handleAddCountItem"
-          >
-          <v-icon color="blue-grey darken-1">mdi-tshirt-crew-outline</v-icon>
-        </v-btn>
-        <v-btn
-          icon
-          small
-          @click="handleShowItemEditModal"
-          :id="'item-edit-' + item.id"
-          >
-          <v-icon color="blue-grey darken-1">mdi-pencil</v-icon>
-        </v-btn>
+  <div class="col-sm-12 col-lg-4 mb-3">
+    <div
+      class="card"
+      :id="'item-' + item.id">
+      <v-img class="card-image grey lighten-3"
+             :id="'item-image-' + item.id"
+             :src="item.image_url"
+             @click="handleDetailItem(item)"
+             height="343"
+             contain />
+      <div class="card-box">
+        <h3 class="card-title">{{ item.name }}</h3>
+        <div class="card-icons">
+          <div class="wearing-times">0回</div>
+          <v-btn
+            class="card-icon"
+            icon
+            small
+            @click="handleDeleteItem"
+            :id="'item-delete-' + item.id"
+            >
+            <v-icon color="grey lighten-2">mdi-delete</v-icon>
+          </v-btn>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import axiox from '../../../plugins/axios'
+import { mapGetters } from "vuex"
 
 export default {
   name: 'ItemCard',
@@ -69,21 +65,18 @@ export default {
       user_id: {
         type: Number,
         required: true
-      }
-    },
+      },
+    }
   },
   computed: {
-    ...mapGetters('items', ['items'])
+    ...mapGetters('items', ['items']),
   },
   methods: {
     handleDetailItem(item) {
       this.$emit('detail-item', this.item)
     },
-    handleAddCountItem() {
-      this.$emit('item-addCount', this.item)
-    },
-    handleShowItemEditModal() {
-      this.$emit('show-editModal', this.item)
+    handleDeleteItem() {
+      this.$emit('delete-item', this.item)
     }
   }
 }
@@ -98,7 +91,8 @@ export default {
     "card-box"   10%;
   box-shadow: 5px 10px 20px rgba(0,0,0,0.25);
   border-radius: 3px;
-  border: 4px solid white;
+  border: 4px solid #363232;
+  background-color:#363232;
 }
 
 .card-image {
@@ -118,10 +112,26 @@ export default {
   grid-area: card-title;
   font-weight: 550;
   font-size: 1.4rem;
+  color:lightgray;
 }
 
 .card-icons{
   grid-area: card-icons;
+  display: grid;
+  grid-template:
+   "wearing-times card-icon"
+   / 55% 45%
+}
+
+.wearing-times{
+  grid-area: wearing-times;
+  font-weight: bold;
+  color: lightgray;
+  font-size: 1.18rem;
+}
+
+.card-icon{
+  grid-area: card-icon;
 }
 
 @media screen and (max-width: 1050px){

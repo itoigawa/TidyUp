@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
   root 'home#index'
   namespace :api do
-    resources :items do
-      resources :wearing_times, only: %i[index create]
+    resources :items, shallow: true do
+      resources :wearing_times, only: %i[create]
+      get 'delete_list', on: :collection
     end
     resources :sessions
-    resources :users do
+    resources :users, only: %i[create] do
       collection do
         get 'me'
       end

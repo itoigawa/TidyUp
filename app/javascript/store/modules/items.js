@@ -54,6 +54,13 @@ const actions = {
         commit('deleteItem', res.data)
       })
   },
+  fetchNotWearingItems({ commit }, item) {
+    axios.get('items/delete_list')
+      .then(res => {
+        commit('setItems', res.data)
+      })
+      .catch(err => console.log(err.response))
+  }
 }
 
 export default {

@@ -36,10 +36,10 @@
         </div>
         <div class="info-box">
           <div class="info-form">
-            <ValidationProvider class="name" v-slot="{ errors }" name="商品名" rules="required|max:10">
+            <ValidationProvider class="name" v-slot="{ errors }" name="商品名" rules="required|max:12">
               <v-text-field
                 v-model="item.name"
-                :counter="10"
+                :counter="12"
                 id="name"
                 :error-messages="errors"
                 label="商品名"

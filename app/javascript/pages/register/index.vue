@@ -1,5 +1,14 @@
 <template>
 <div id="register-form" class="form-wrapper">
+  <template v-if="isVisibleRegisterAlert">
+    <div class="register-alert">
+      <v-alert
+        type="info"
+      >
+        ユーザー登録が完了しました
+      </v-alert>
+    </div>
+  </template>
   <div class="form-card">
     <div class="register">ユーザー登録</div>
     <ValidationObserver class="form-input" v-slot="{ handleSubmit }">
@@ -60,13 +69,13 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
 export default {
   name: "RegisterIndex",
   data() {
     return {
-        show1: false,
-        show2: false,
+      isVisibleRegisterAlert: false,
+      show1: false,
+      show2: false,
       user: {
         email: '',
         password: '',
@@ -74,13 +83,16 @@ export default {
       }
     }
   },
-
   methods: {
+    handleShowRegisterAlert(){
+      this.isVisibleRegisterAlert = true;
+    },
     register() {
       this.$axios.post('users', { user: this.user })
-        // .then(res => {
+        .then(res => {
+          this.handleShowRegisterAlert()
           // this.$router.push({ name: 'LoginIndex' })
-        // })
+        })
         .catch(err => {
           console.log(err)
         })
@@ -99,10 +111,16 @@ export default {
 .form-wrapper{
   min-height: 100vh;
   display: grid;
-  grid-template:"....  ........   ...." auto
-                "....  form-card  ...." 55%      
-                "....  .........  ...." auto
+  grid-template:"....  .............  ...." 9%
+                "....  register-alert ...." 7%
+                "....  .............  ...." 9%
+                "....  form-card      ...." 54%
+                "....  .............  ...." 23%
                 /auto  40% auto
+}
+
+.register-alert{
+  grid-area: register-alert;
 }
 
 .form-card{
@@ -117,7 +135,7 @@ export default {
                  /12%  1%   74%           13%;;
   border-top: 4px solid #18ebfa;
   border-radius: 3px;
-  background-color:white ;
+  background-color:white;
   box-shadow: 0 7px 10px 2px rgba(0, 0, 0, 0.08);
 }
 
@@ -146,10 +164,12 @@ export default {
 }
 
 @media screen and (max-width: 1050px) {
-  .form-wrapper{
-    grid-template:"... ......... ..." auto
-                  "... form-card ..." 65%
-                  "... ......... ..." auto
+  .form-wrapper {
+    grid-template:".... .............. ...." 6%
+                  ".... register-alert ...." 4%
+                  ".... .............. ...." 6%
+                  ".... form-card      ...." 64%
+                  ".... .............. ...." 16%
                   /auto 90% auto
   }
 }

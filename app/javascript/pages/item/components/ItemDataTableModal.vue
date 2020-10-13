@@ -46,7 +46,6 @@ export default {
         { text: '商品名', value: 'name', sortable: false},
         { text: 'カテゴリー', value: 'category', sortable: false },
         { text: '色', value: 'color', sortable: false },
-        { text: '使用回数', value: '', sortable: false },
         { text: 'シーン', value: 'scene', sortable: false },
         { text: '購入日', value: 'purchased_at', sortable: false },
       ],
