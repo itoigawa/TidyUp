@@ -2,7 +2,7 @@ class Item < ApplicationRecord
   belongs_to :user
   has_many :wearing_times, dependent: :destroy
 
-  validates :name, presence: true, length: { maximum: 10 }
+  validates :name, presence: true, length: { maximum: 12 }
   validates :category, presence: true
   validates :color, presence: true
   validates :scene, presence: true
@@ -19,5 +19,7 @@ class Item < ApplicationRecord
     image.attached? ? Rails.application.routes.url_helpers.rails_blob_path(image, only_path: true) : nil
   end
 
+  scope :wearing, -> { joins(:wearing_times).where('wearing_times.count >= ?', 1) }
+  scope :two_weeks_ago, -> { joins(:wearing_times).where('wearing_times.created_at > ?', Time.current.ago(1.month)) }
   scope :search, ->(term) { where('LOWER(name) LIKE ?', "%#{term}%") }
 end

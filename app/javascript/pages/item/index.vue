@@ -5,54 +5,61 @@
     @calendar="handleShowItemCalendarModal"
     @today-weather="handleShowTodayWeatherModal"
     @all-items-list="handleShowAllItemsList"
-    @all-tops-list="handleShowAllTopsList"
-    @all-outor-list="handleShowAllOutorList"
-    @all-pants-list="handleShowAllPantsList"
-    @all-shoes-list="handleShowAllShoesList"
+    @tops-list="handleShowTopsList"
+    @outor-list="handleShowOutorList"
+    @pants-list="handleShowPantsList"
+    @shoes-list="handleShowShoesList"
     />
+  <template v-if="isVisibleLoginAlert">
+    <div class="login-alert">
+      <v-alert
+        outlined
+        text
+        dense
+        type="success"
+      >
+        ログインしました
+      </v-alert>
+    </div>
+  </template>
   <template v-if="isVisibleAllItems">
     <ItemList
       @detail-item="handleShowItemDetailModal"
       @item-addCount="handleAddCountItem"
       @show-editModal="handleShowItemEditModal"
-      @delete-item="handleDeleteItem"
       :items="allItems"
       />
   </template>
-  <template  v-if="isVisibleAllTops">
+  <template  v-if="isVisibleTops">
     <ItemList
       @detail-item="handleShowItemDetailModal"
       @item-addCount="handleAddCountItem"
       @show-editModal="handleShowItemEditModal"
-      @delete-item="handleDeleteItem"
-      :items="allTops"
+      :items="tops"
       />
   </template>
-  <template v-if="isVisibleAllOutor">
+  <template v-if="isVisibleOutor">
     <ItemList
       @detail-item="handleShowItemDetailModal"
       @item-addCount="handleAddCountItem"
       @show-editModal="handleShowItemEditModal"
-      @delete-item="handleDeleteItem"
-      :items="allOutor"
+      :items="outor"
       />
   </template>
-  <template v-if="isVisibleAllPants">
+  <template v-if="isVisiblePants">
     <ItemList
       @detail-item="handleShowItemDetailModal"
       @item-addCount="handleAddCountItem"
       @show-editModal="handleShowItemEditModal"
-      @delete-item="handleDeleteItem"
-      :items="allPants"
+      :items="pants"
       />
   </template>
-  <template v-if="isVisibleAllShoes">
+  <template v-if="isVisibleShoes">
     <ItemList
       @detail-item="handleShowItemDetailModal"
       @item-addCount="handleAddCountItem"
       @show-editModal="handleShowItemEditModal"
-      @delete-item="handleDeleteItem"
-      :items="allShoes"
+      :items="shoes"
       /> 
   </template>
   <modal name="item-create-modal"
@@ -120,8 +127,8 @@
 </style>
 
 <script>
-import axios from '../../plugins/axios';
-import { mapGetters, mapActions } from "vuex"
+import axios from '../../plugins/axios'
+import { mapGetters, mapActions } from 'vuex'
 import ItemHeader from './components/ItemHeader'
 import ItemList from './components/ItemList'
 import ItemExhibitButton from './components/ItemExhibitButton'
@@ -148,10 +155,11 @@ export default {
     TodayWeatherModal,
     TheFooter
   },
-  data(){
+  data() {
     return {
       itemDetail: {},
       itemEdit: {},
+      isVisibleLoginAlert: false,
       isVisibleItemCreateModal: false,
       isVisibleItemEditModal: false,
       isVisibleItemDetailModal: false,
@@ -159,33 +167,33 @@ export default {
       isVisibleItemCalendarModal: false,
       isVisibleTodayWeatherModal: false,
       isVisibleAllItems: true,
-      isVisibleAllTops: false,
-      isVisibleAllOutor: false,
-      isVisibleAllPants: false,
-      isVisibleAllShoes: false
+      isVisibleTops: false,
+      isVisibleOutor: false,
+      isVisiblePants: false,
+      isVisibleShoes: false
     }
   },
-  computed:{
+  computed: {
     ...mapGetters('items', ['items']),
     allItems(){
       return this.items
     },
-    allTops(){
+    tops(){
       return this.items.filter(item => {
         return item.category == 'トップス'
       })
     },
-    allOutor(){
+    outor(){
       return this.items.filter(item => {
         return item.category == 'アウター'
       })
     },
-    allPants(){
+    pants(){
       return this.items.filter(item => {
         return item.category == 'パンツ'
       })
     },
-    allShoes(){
+    shoes(){
       return this.items.filter(item => {
         return item.category == 'シューズ'
       })
@@ -203,9 +211,15 @@ export default {
       [
         'fetchItems',
         'createItem',
-        'updateItem',
-        'deleteItem'
+        'updateItem'
       ]),
+    handleShowLoginAlert(){
+      this.isVisibleLoginAlert = true;
+      setTimeout(this.handleCloseLoginAlert, 2000)
+    },
+    handleCloseLoginAlert(){
+      this.isVisibleLoginAlert = false;
+    },
     handleShowItemCreateModal(){
       this.isVisibleItemCreateModal = true;
       this.isVisibleItemEditModal = false;
@@ -234,7 +248,7 @@ export default {
       this.itemEdit = {};
       this.$modal.hide('item-edit-modal');
     },
-    handleShowItemDetailModal(item){
+    handleShowItemDetailModal(item) {
       this.isVisibleItemCreateModal = false;
       this.isVisibleItemEditModal = false;
       this.isVisibleItemDetailModal = true;
@@ -289,38 +303,38 @@ export default {
     },
     handleShowAllItemsList(){
       this.isVisibleAllItems = true;
-      this.isVisibleAllTops = false;
-      this.isVisibleAllOutor = false;
-      this.isVisibleAllPants = false;
-      this.isVisibleAllShoes = false;
+      this.isVisibleTops = false;
+      this.isVisibleOutor = false;
+      this.isVisiblePants = false;
+      this.isVisibleShoes = false;
     },
-    handleShowAllTopsList(){
+    handleShowTopsList(){
       this.isVisibleAllItems = false;
-      this.isVisibleAllTops = true;
-      this.isVisibleAllOutor = false;
-      this.isVisibleAllPants = false;
-      this.isVisibleAllShoes = false;
+      this.isVisibleTops = true;
+      this.isVisibleOutor = false;
+      this.isVisiblePants = false;
+      this.isVisibleShoes = false;
     },
-    handleShowAllOutorList(){
+    handleShowOutorList(){
       this.isVisibleAllItems = false;
-      this.isVisibleAllTops = false;
-      this.isVisibleAllOutor = true;
-      this.isVisibleAllPants = false;
-      this.isVisibleAllShoes = false;
+      this.isVisibleTops = false;
+      this.isVisibleOutor = true;
+      this.isVisiblePants = false;
+      this.isVisibleShoes = false;
     },
-    handleShowAllPantsList(){
+    handleShowPantsList(){
       this.isVisibleAllItems = false;
-      this.isVisibleAllTops = false;
-      this.isVisibleAllOutor = false;
-      this.isVisibleAllPants = true;
-      this.isVisibleAllShoes = false;
+      this.isVisibleTops = false;
+      this.isVisibleOutor = false;
+      this.isVisiblePants = true;
+      this.isVisibleShoes = false;
     },
-    handleShowAllShoesList(){
+    handleShowShoesList(){
       this.isVisibleAllItems = false;
-      this.isVisibleAllTops = false;
-      this.isVisibleAllOutor = false;
-      this.isVisibleAllPants = false;
-      this.isVisibleAllShoes = true;
+      this.isVisibleTops = false;
+      this.isVisibleOutor = false;
+      this.isVisiblePants = false;
+      this.isVisibleShoes = true;
     },
     async handleCreateItem(formData) {
       try {
@@ -331,7 +345,7 @@ export default {
       }
     },
     async handleUpdateItem(formData) {
-      try{
+      try {
         await this.updateItem(formData);
         this.handleCloseItemEditModal();
       } catch (error) {
@@ -340,20 +354,10 @@ export default {
     },
     async handleAddCountItem(item) {
       const AddCountItem = confirm('今日、アイテムを着用しますか？');
-      try{
+      try {
         if( AddCountItem == true ){
           axios.post(`items/${item.id}/wearing_times`, item)
         } 
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    async handleDeleteItem(item) {
-      const deleteItem = confirm('アイテムを削除しますか？');
-      try{
-        if( deleteItem == true ) {
-          await this.deleteItem(item);
-        }
       } catch (error) {
         console.log(error);
       }
@@ -366,4 +370,7 @@ export default {
 </script>
 
 <style scoped>
+.login-alert{
+  margin-top: 0.5rem;
+}
 </style>

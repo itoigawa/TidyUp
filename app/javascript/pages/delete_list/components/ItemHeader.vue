@@ -1,40 +1,27 @@
 <template>
   <v-card>
     <v-app-bar
-      color="#aaacb5"
+      color="#fcb69f"
       dark
       prominent
-      src="/assets/headerImage.png"
+      src="/assets/schrecksee.jpg"
     >
       <template v-slot:img="{ props }">
         <v-img
           v-bind="props"
-          gradient="to top right, rgba(90,90,90), rgba(25,32,72,.7)"
+          gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"
         ></v-img>
       </template>
 
-      <v-toolbar-title>TidyUp</v-toolbar-title>
+      <v-toolbar-title>Delete List ( 1month )</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
       <v-btn icon
-             to="/delete-list"
+             to="/items"
              class="icon"
              @click="handleCalendar">
-        <v-icon>mdi-delete-clock-outline</v-icon>
-      </v-btn>
-
-      <v-btn icon
-             class="icon"
-             @click="handleDataTable"
-             id="item-data-table">
-          <v-icon>mdi-archive-outline</v-icon>
-      </v-btn>
-
-      <v-btn icon
-             class="icon"
-             @click="handleTodayWeather">
-        <v-icon>mdi-weather-partly-cloudy</v-icon>
+        <v-icon>mdi-wardrobe</v-icon>
       </v-btn>
 
       <v-menu

@@ -1,39 +1,39 @@
 <template>
-  <div :id="'item-detail-modal-' + item.id">
-    <div class="card">
-      <v-btn 
-        icon
-        class="close-btn"
-        @click="handleCloseModal">
-        <v-icon small>mdi-close</v-icon>
-      </v-btn>
-      <div class="item-name">{{ item.name }}</div>
-      <v-img :src="item.image_url"
-              class="card-image"
-              height="390"
-              contain />
-      <v-simple-table height="20rem" class="item-info">
-        <tbody>
-          <tr>
-            <td class="table-name">カテゴリー</td>
-            <td class="table-value">{{ item.category }}</td>
-          </tr>
-          <tr>
-            <td class="table-name">色</td>
-            <td class="table-value">{{ item.color}}</td>
-          </tr>
-          <tr>
-            <td class="table-name">シーン</td>
-            <td class="table-value">{{ item.scene }}</td>
-          </tr>
-          <tr>
-            <td class="table-name">購入日</td>
-            <td class="table-value">{{ item.purchased_at }}</td>
-          </tr>
-        </tbody>
-      </v-simple-table>
-    </div>
+<div :id="'item-detail-modal-' + item.id">
+  <div class="card">
+    <v-btn 
+      icon
+      class="close-btn"
+      @click="handleCloseModal">
+      <v-icon small>mdi-close</v-icon>
+    </v-btn>
+    <div class="item-name">{{ item.name }}</div>
+    <v-img :src="item.image_url"
+           class="card-image"
+           height="390"
+           contain />
+    <v-simple-table height="20rem" class="item-info">
+      <tbody>
+        <tr>
+          <td class="table-name">カテゴリー</td>
+          <td class="table-value">{{ item.category }}</td>
+        </tr>
+        <tr>
+          <td class="table-name">色</td>
+          <td class="table-value">{{ item.color }}</td>
+        </tr>
+        <tr>
+          <td class="table-name">シーン</td>
+          <td class="table-value">{{ item.scene }}</td>
+        </tr>
+        <tr>
+          <td class="table-name">購入日</td>
+          <td class="table-value">{{ item.purchased_at }}</td>
+        </tr>
+      </tbody>
+    </v-simple-table>
   </div>
+</div>
 </template>
 
 <script>
@@ -57,7 +57,7 @@ export default {
       },
       color: {
         type: String,
-        required: true,
+        required: true
       },
       scene: {
         type: String,
