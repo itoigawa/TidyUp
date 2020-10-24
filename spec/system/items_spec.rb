@@ -26,8 +26,8 @@ RSpec.describe "Items", type: :system do
     within '#item-create-modal' do
       fill_in 'name', with: ' '
       expect(page).to have_content('商品名は必須項目です'), '必須チェックのバリデーションエラーが表示されていません'
-      fill_in 'name', with: 'a' * 11
-      expect(page).to have_content('商品名は10文字以下で入力してください'), '文字数チェックのバリデーションエラーが表示されていません'
+      fill_in 'name', with: 'a' * 13
+      expect(page).to have_content('商品名は12文字以下で入力してください'), '文字数チェックのバリデーションエラーが表示されていません'
       click_on '登録'
       expect(page).to have_content('カテゴリーは必須項目です'), '必須チェックのバリデーションエラーが表示されていません'
       expect(page).to have_content('カラーは必須項目です'), '必須チェックのバリデーションエラーが表示されていません'
@@ -42,8 +42,8 @@ RSpec.describe "Items", type: :system do
     within "#item-edit-modal-#{item.id}" do
       fill_in 'name', with: ' '
       expect(page).to have_content('商品名は必須項目です'), '必須チェックのバリデーションエラーが表示されていません'
-      fill_in 'name', with: 'a' * 11
-      expect(page).to have_content('商品名は10文字以下で入力してください'), '文字数チェックのバリデーションエラーが表示されていません'
+      fill_in 'name', with: 'a' * 13
+      expect(page).to have_content('商品名は12文字以下で入力してください'), '文字数チェックのバリデーションエラーが表示されていません'
       click_on '更新'
     end
     expect(page).to have_selector("#item-edit-modal-#{item.id}"), 'バリデーションエラーが発生しているときに画面遷移してはいけません'
@@ -78,12 +78,12 @@ RSpec.describe "Items", type: :system do
   # it 'カードの着用ボタンを押すと着用回数が増える' do
   # end
 
-  it 'カードの削除ボタンを押すとアイテムが削除される' do
-    item = create(:item, user: user)
-    find("#item-delete-#{item.id}").click
-    page.driver.browser.switch_to.alert.accept
-    expect(page).to_not have_selector("#item-#{item.id}"), 'アイテムが削除されていません'
-  end
+  # it 'カードの削除ボタンを押すとアイテムが削除される' do
+  #   item = create(:item, user: user)
+  #   find("#item-delete-#{item.id}").click
+  #   page.driver.browser.switch_to.alert.accept
+  #   expect(page).to_not have_selector("#item-#{item.id}"), 'アイテムが削除されていません'
+  # end
 
   it '追加したアイテムがアイテムデータテーブルに表示されている' do
     item1 = create(:item, name: 'トップス', category: 'トップス', user: user)
@@ -109,4 +109,24 @@ RSpec.describe "Items", type: :system do
     expect(Item.search('シューズ')).to include(item4)
   end
 
+  it '着用していないアイテムが削除リストで表示されている' do
+    item1 = create(:item, name: 'トップス', category: 'トップス', user: user)
+    item2 = create(:item, name: 'アウター', category: 'アウター', user: user)
+    item3 = create(:item, name: 'パンツ', category: 'パンツ', user: user)
+    item4 = create(:item, name: 'シューズ', category: 'シューズ', user: user)
+    find('#item-delete-list').click
+    expect(page).to have_content('トップス'), '追加したアイテム(トップス)が表示されていません'
+    expect(page).to have_content('アウター'), '追加したアイテム(アウター)が表示されていません'
+    expect(page).to have_content('パンツ'), '追加したアイテム(パンツ)が表示されていません'
+    expect(page).to have_content('シューズ'), '追加したアイテム(シューズ)が表示されていません'
+  end
+
+  it '削除リストでアイテムの削除が機能していること' do
+    item = create(:item, user: user)
+    find('#item-delete-list').click
+    find("#item-delete-#{item.id}").click
+    page.driver.browser.switch_to.alert.accept
+    expect(page).to_not have_selector("#item-#{item.id}"), 'アイテムが削除されていません'
+    expect(page).to have_content('Great！'), 'アイテム削除完了後のモーダルが表示されていません'
+  end
 end

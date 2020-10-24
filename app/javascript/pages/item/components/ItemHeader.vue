@@ -20,7 +20,8 @@
       <v-btn icon
              to="/delete-list"
              class="icon"
-             @click="handleCalendar">
+             @click="handleCalendar"
+             id="item-delete-list">
         <v-icon>mdi-delete-clock-outline</v-icon>
       </v-btn>
 
