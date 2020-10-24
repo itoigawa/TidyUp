@@ -1,7 +1,6 @@
 <template>
-<div class="wrapper">
-  <span class="design_sample1">アイテムを削除しました</span>
-  <span class="design_sample2">Congratulations！</span>
+<div class="modal-wrapper">
+<h1>Great！</h1>
 </div>
 </template>
 
@@ -12,36 +11,26 @@ export default {
 </script>
 
 <style scoped>
-.wrapper {
-  background-color: #000;
+.modal-wrapper {
+  display: flex;
+  align-items: center;
+  background-color: #141414;
+}
+
+h1 {
+  font-size: 9vw;
+  font-weight: 700;
+  font-family: 'Rubik', sans-serif;
+  flex: 1;
+  position: relative;
   text-align: center;
+  margin: 0;
+  color: transparent;
+  background-image: url("http://66.media.tumblr.com/9d5be60c175cdbe15e875fef01b9a66b/tumblr_ntz3mmEFFr1twd8ddo1_500.gif");
+  background-size: cover;
+  background-clip: text;
+  background-repeat: no-repeat;
 }
-
-.design_sample1 {
-    font-size: 38px;
-    text-align: center;
-    line-height: 50px;
-    font-weight: bold;
-    color: #FFF;
-    text-shadow: 
-        0 0 0.10em gray,
-        0 0 0.20em gray,
-        0 0 0.30em gray,
-        0 0 0.40em gray;
-    filter: saturate(80%);
-}
-
-.design_sample2 {
-    font-size: 40px;
-    text-align: center;
-    font-weight: bold;
-    color: #FFF;
-    text-shadow: 
-        0 0 0.20em gray,
-        0 0 0.30em gray,
-        0 0 0.40em gray,
-        0 0 0.50em gray;
-    filter: saturate(80%);
-}
+ 
 
 </style>
