@@ -20,7 +20,6 @@
       <v-btn icon
              to="/delete-list"
              class="icon"
-             @click="handleCalendar"
              id="item-delete-list">
         <v-icon>mdi-delete-clock-outline</v-icon>
       </v-btn>
@@ -103,9 +102,6 @@ export default {
     },
     handleDataTable(){
       this.$emit('data-table')
-    },
-    handleCalendar(){
-      this.$emit('calendar')
     },
     handleTodayWeather(){
       this.$emit('today-weather')

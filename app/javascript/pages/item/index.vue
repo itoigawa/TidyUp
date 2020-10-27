@@ -2,7 +2,6 @@
 <div>
   <ItemHeader
     @data-table="handleShowItemDataTableModal"
-    @calendar="handleShowItemCalendarModal"
     @today-weather="handleShowTodayWeatherModal"
     @all-items-list="handleShowAllItemsList"
     @tops-list="handleShowTopsList"
@@ -101,13 +100,6 @@
       @close-modal="handleCloseItemDataTableModal"
       />
   </modal>
-  <modal name="item-calendar-modal"
-         :adaptive="true"
-         height="auto">
-    <ItemCalendarModal
-      v-if="isVisibleItemCalendarModal"
-      />
-  </modal>
   <modal name="today-weather-modal"
          :adaptive="true"
          :minHeight= 400>
@@ -136,7 +128,6 @@ import ItemCreateModal from './components/ItemCreateModal'
 import ItemEditModal from './components/ItemEditModal'
 import ItemDetailModal from './components/ItemDetailModal'
 import ItemDataTableModal from './components/ItemDataTableModal'
-import ItemCalendarModal from './components/ItemCalendarModal'
 import TodayWeatherModal from './components/TodayWeatherModal'
 import TheFooter from 'components/shared/TheFooter'
 
@@ -151,7 +142,6 @@ export default {
     ItemEditModal,
     ItemDetailModal,
     ItemDataTableModal,
-    ItemCalendarModal,
     TodayWeatherModal,
     TheFooter
   },
@@ -164,7 +154,6 @@ export default {
       isVisibleItemEditModal: false,
       isVisibleItemDetailModal: false,
       isVisibleItemDataTableModal: false,
-      isVisibleItemCalendarModal: false,
       isVisibleTodayWeatherModal: false,
       isVisibleAllItems: true,
       isVisibleTops: false,
@@ -225,7 +214,6 @@ export default {
       this.isVisibleItemEditModal = false;
       this.isVisibleItemDetailModal = false;
       this.isVisibleItemDataTableModal = false;
-      this.isVisibleItemCalendarModal = false;
       this.isVisibleTodayWeatherModal = false;
       this.$modal.show('item-create-modal');
     },
@@ -238,7 +226,6 @@ export default {
       this.isVisibleItemEditModal = true;
       this.isVisibleItemDetailModal = false;
       this.isVisibleItemDataTableModal = false;
-      this.isVisibleItemCalendarModal = false;
       this.isVisibleTodayWeatherModal = false;
       this.itemEdit = Object.assign({}, item);
       this.$modal.show('item-edit-modal');
@@ -253,7 +240,6 @@ export default {
       this.isVisibleItemEditModal = false;
       this.isVisibleItemDetailModal = true;
       this.isVisibleItemDataTableModal = false;
-      this.isVisibleItemCalendarModal = false;
       this.isVisibleTodayWeatherModal = false;
       this.itemDetail = item;
       this.$modal.show('item-detail-modal');
@@ -267,7 +253,6 @@ export default {
       this.isVisibleItemEditModal = false;
       this.isVisibleItemDetailModal = false;
       this.isVisibleItemDataTableModal = true;
-      this.isVisibleItemCalendarModal = false;
       this.isVisibleTodayWeatherModal = false;
       this.$modal.show('item-data-table-modal');
     },
@@ -275,25 +260,11 @@ export default {
       this.isVisibleItemDataTableModal = false;
       this.$modal.hide('item-data-table-modal');
     },
-    handleShowItemCalendarModal(){
-      this.isVisibleItemCreateModal = false;
-      this.isVisibleItemEditModal = false;
-      this.isVisibleItemDetailModal = false;
-      this.isVisibleItemDataTableModal = false;
-      this.isVisibleItemCalendarModal = true;
-      this.isVisibleTodayWeatherModal = false;
-      this.$modal.show('item-calendar-modal');
-    },
-    handleCloseItemCalendarModal(){
-      this.isVisibleItemCalendarModal = false;
-      this.$modal.hide('item-calendar-modal');
-    },
     handleShowTodayWeatherModal(){
       this.isVisibleItemCreateModal = false;
       this.isVisibleItemEditModal = false;
       this.isVisibleItemDetailModal = false;
       this.isVisibleItemDataTableModal = false;
-      this.isVisibleItemCalendarModal = false;
       this.isVisibleTodayWeatherModal = true;
       this.$modal.show('today-weather-modal');
     },

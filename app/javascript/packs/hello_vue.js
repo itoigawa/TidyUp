@@ -12,7 +12,6 @@ import store from '../store'
 import axios from '../plugins/axios'
 import vuetify from '../plugins/vuetify'
 import '../plugins/veevalidate'
-// import '../plugins/fullcalendar'
 import '../plugins/vue-js-modal'
 import 'bootstrap/dist/css/bootstrap.css'
 

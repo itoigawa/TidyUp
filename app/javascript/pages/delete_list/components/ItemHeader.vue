@@ -19,8 +19,7 @@
 
       <v-btn icon
              to="/items"
-             class="icon"
-             @click="handleCalendar">
+             class="icon">
         <v-icon>mdi-wardrobe</v-icon>
       </v-btn>
 
@@ -89,9 +88,6 @@ export default {
     },
     handleDataTable(){
       this.$emit('data-table')
-    },
-    handleCalendar(){
-      this.$emit('calendar')
     },
     handleTodayWeather(){
       this.$emit('today-weather')
