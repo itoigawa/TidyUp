@@ -11,10 +11,10 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
-    <%= javascript_pack_tag 'hello_vue' %>
   </head>
 
   <body>
     <%= yield %>
+    <%= javascript_pack_tag 'hello_vue' %>
   </body>
 </html>
