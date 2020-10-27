@@ -18,7 +18,7 @@
       <v-spacer></v-spacer>
 
       <v-btn icon
-             to="/items"
+             to="/"
              class="icon">
         <v-icon>mdi-wardrobe</v-icon>
       </v-btn>

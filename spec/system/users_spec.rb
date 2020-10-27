@@ -31,13 +31,13 @@ RSpec.describe "ユーザー機能", type: :system do
   end
 
   it '未ログイン状態でアイテムページに遷移したら、ログインページにリダイレクトされる' do
-    visit '/items'
+    visit '/'
     expect(page).to have_current_path('/login'), 'ログインページに遷移できていません'
   end
 
   it 'ログイン状態でアイテムページに遷移したら、アイテムページが表示される' do
     login_as(user)
-    visit '/items'
+    visit '/'
     expect(page).to have_current_path('/items'), 'アイテムページに遷移できていません'
   end
 

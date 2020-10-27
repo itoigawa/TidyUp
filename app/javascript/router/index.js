@@ -13,7 +13,7 @@ const router = new Router({
   mode: 'history',
   routes: [
     {
-      path: '/items',
+      path: '/',
       component: ItemIndex,
       name: 'ItemIndex',
       meta: { requiredAuth: true },
