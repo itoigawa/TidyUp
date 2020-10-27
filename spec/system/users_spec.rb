@@ -20,7 +20,7 @@ RSpec.describe "ユーザー機能", type: :system do
       fill_in 'password', with: '12345678'
       click_on 'ログイン'
     end
-    expect(page).to have_current_path('/items'), 'アイテムページに遷移できていません'
+    expect(page).to have_current_path('/'), 'アイテムページに遷移できていません'
   end
 
   it 'ログイン状態でログアウトできる' do
@@ -38,7 +38,7 @@ RSpec.describe "ユーザー機能", type: :system do
   it 'ログイン状態でアイテムページに遷移したら、アイテムページが表示される' do
     login_as(user)
     visit '/'
-    expect(page).to have_current_path('/items'), 'アイテムページに遷移できていません'
+    expect(page).to have_current_path('/'), 'アイテムページに遷移できていません'
   end
 
   it 'ユーザー登録フォームでバリデーションが機能していること' do
