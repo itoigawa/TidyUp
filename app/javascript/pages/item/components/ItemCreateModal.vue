@@ -116,7 +116,7 @@
               </v-flex>
               <v-spacer></v-spacer>
             </ValidationProvider>
-            <v-btn x-large block color="deep-orange darken-3" right dark  v-bind:disabled="isProcessing()" @click="handleSubmit(handleCreateItem)" class="register-btn">登録</v-btn>
+            <v-btn x-large block color="deep-orange darken-3" right dark  :disabled="processing" @click.prevent="handleSubmit(handleCreateItem)" class="register-btn">登録</v-btn>
           </div>
         </div>
       </div>
@@ -180,18 +180,32 @@ export default {
       }
     },
     handleCreateItem() {
-      const formData = new FormData()
-      formData.append('item[name]', this.item.name)
-      formData.append('item[category]', this.item.category)
-      formData.append('item[color]', this.item.color)
-      formData.append('item[scene]', this.item.scene)
-      formData.append('item[purchased_at]', this.item.purchased_at)
-      if (this.uploadImage) formData.append('item[image]', this.uploadImage)
-      try {
-        this.$emit('create-item', formData)
-      } catch (error) {
-        console.log(error);
-      }
+      if (this.processing) return;
+      this.processing = true;
+      this.doSomething()
+      .then(() => {
+        this.processing = false;
+        const formData = new FormData()
+        formData.append('item[name]', this.item.name)
+        formData.append('item[category]', this.item.category)
+        formData.append('item[color]', this.item.color)
+        formData.append('item[scene]', this.item.scene)
+        formData.append('item[purchased_at]', this.item.purchased_at)
+        if (this.uploadImage) formData.append('item[image]', this.uploadImage)
+        try {
+          this.$emit('create-item', formData)
+        } catch (error) {
+          console.log(error);
+        }
+      });
+    },
+    doSomething() {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          console.log(`Submitted on ${new Date()}`);
+          resolve();
+        }, 1000);
+      });
     },
     handleCloseModal(){
       this.$emit('close-modal')

@@ -32,7 +32,7 @@ extend('required', {
 
 extend('image', {
   ...image,
-  message: '{_field_}は画像形式で入力してください'
+  message: '{_field_}は有効な画像形式で入力してください'
 });
 
 extend('numeric', {

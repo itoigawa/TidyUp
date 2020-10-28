@@ -121,7 +121,7 @@
               </v-flex>
               <v-spacer></v-spacer>
             </ValidationProvider>
-            <v-btn x-large block color="green darken-1" right dark v-bind:disabled="isProcessing()" @click="handleSubmit(handleUpdateItem)" class="register-btn">更新</v-btn>
+            <v-btn x-large block color="green darken-1" right dark :disabled="processing" @click.prevent="handleSubmit(handleUpdateItem)" class="register-btn">更新</v-btn>
           </div>
         </div>
       </div>
@@ -170,6 +170,7 @@ export default {
       menu: false,
       previewImage: '',
       uploadImage: '',
+      processing: false,
       categories: [
         'トップス',
         'アウター',
@@ -207,29 +208,34 @@ export default {
       }
     },
     handleUpdateItem() {
-      const formData = new FormData()
-      formData.append('id', 1)
-      formData.append('item[id]', this.item.id)
-      formData.append('item[name]', this.item.name)
-      formData.append('item[category]', this.item.category)
-      formData.append('item[color]', this.item.color)
-      formData.append('item[scene]', this.item.scene)
-      formData.append('item[purchased_at]', this.item.purchased_at)
-      if (this.uploadImage) formData.append('item[image]', this.uploadImage)
-      try {
-        this.$emit('update-item', formData)
-      } catch (error) {
-        console.log(error);
-      }
+      if (this.processing) return;
+      this.processing = true;
+      this.doSomething()
+      .then(() => {
+        this.processing = false;
+        const formData = new FormData()
+        formData.append('id', 1)
+        formData.append('item[id]', this.item.id)
+        formData.append('item[name]', this.item.name)
+        formData.append('item[category]', this.item.category)
+        formData.append('item[color]', this.item.color)
+        formData.append('item[scene]', this.item.scene)
+        formData.append('item[purchased_at]', this.item.purchased_at)
+        if (this.uploadImage) formData.append('item[image]', this.uploadImage)
+        try {
+          this.$emit('update-item', formData)
+        } catch (error) {
+          console.log(error);
+        }
+      });
     },
-    startProcessing: function () {
-      this.processing = true
-    },
-    endProcessing: function () {
-      this.processing = false
-    },
-    isProcessing: function () {
-      return this.processing
+    doSomething() {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          console.log(`Submitted on ${new Date()}`);
+          resolve();
+        }, 1000);
+      })
     },
     handleCloseModal(){
       this.$emit('close-modal')
