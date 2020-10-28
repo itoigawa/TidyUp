@@ -6,6 +6,7 @@ import ItemIndex from '../pages/item/index'
 import RegisterIndex from '../pages/register/index'
 import LoginIndex from '../pages/login/index'
 import DeleteListIndex from '../pages/delete_list/index'
+import NotFound from '../components/shared/NotFound'
 
 Vue.use(Router)
 
@@ -32,6 +33,11 @@ const router = new Router({
       path: '/delete-list',
       component: DeleteListIndex,
       name: 'DeliteListIndex'
+    },
+    {
+      path: '*',
+      component: NotFound,
+      name: 'NotFound'
     }
   ],
 })

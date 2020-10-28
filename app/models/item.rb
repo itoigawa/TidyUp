@@ -20,6 +20,6 @@ class Item < ApplicationRecord
   end
 
   scope :wearing, -> { joins(:wearing_times).where('wearing_times.count >= ?', 1) }
-  scope :two_weeks_ago, -> { joins(:wearing_times).where('wearing_times.created_at > ?', Time.current.ago(1.month)) }
+  scope :one_month_ago, -> { joins(:wearing_times).where('wearing_times.created_at > ?', Time.current.ago(1.month)) }
   scope :search, ->(term) { where('LOWER(name) LIKE ?', "%#{term}%") }
 end

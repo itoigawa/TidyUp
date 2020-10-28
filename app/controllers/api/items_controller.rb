@@ -8,7 +8,7 @@ class Api::ItemsController < ApplicationController
   end
 
   def delete_list
-    @delete_list_items = current_user.items.all - current_user.items.all.wearing.two_weeks_ago
+    @delete_list_items = current_user.items.all - current_user.items.wearing.one_month_ago
     render json: @delete_list_items, methods: [:image_url]
   end
 

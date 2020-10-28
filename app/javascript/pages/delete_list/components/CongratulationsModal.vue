@@ -26,7 +26,7 @@ h1 {
   text-align: center;
   margin: 0;
   color: transparent;
-  background-image: url("http://66.media.tumblr.com/9d5be60c175cdbe15e875fef01b9a66b/tumblr_ntz3mmEFFr1twd8ddo1_500.gif");
+  background-image: url('/assets/gradation.jpg');
   background-size: cover;
   background-clip: text;
   background-repeat: no-repeat;

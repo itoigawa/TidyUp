@@ -121,7 +121,7 @@
               </v-flex>
               <v-spacer></v-spacer>
             </ValidationProvider>
-            <v-btn x-large block color="green darken-1" right dark  @click="handleSubmit(handleUpdateItem)" class="register-btn">更新</v-btn>
+            <v-btn x-large block color="green darken-1" right dark v-bind:disabled="isProcessing()" @click="handleSubmit(handleUpdateItem)" class="register-btn">更新</v-btn>
           </div>
         </div>
       </div>
@@ -221,6 +221,15 @@ export default {
       } catch (error) {
         console.log(error);
       }
+    },
+    startProcessing: function () {
+      this.processing = true
+    },
+    endProcessing: function () {
+      this.processing = false
+    },
+    isProcessing: function () {
+      return this.processing
     },
     handleCloseModal(){
       this.$emit('close-modal')

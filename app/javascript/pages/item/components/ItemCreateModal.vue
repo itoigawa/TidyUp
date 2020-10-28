@@ -116,7 +116,7 @@
               </v-flex>
               <v-spacer></v-spacer>
             </ValidationProvider>
-            <v-btn x-large block color="deep-orange darken-3" right dark  @click="handleSubmit(handleCreateItem)" class="register-btn">登録</v-btn>
+            <v-btn x-large block color="deep-orange darken-3" right dark  v-bind:disabled="isProcessing()" @click="handleSubmit(handleCreateItem)" class="register-btn">登録</v-btn>
           </div>
         </div>
       </div>
@@ -135,6 +135,7 @@ export default {
       menu: false,
       previewImage: '',
       uploadImage: '',
+      processing: false,
       item: {
         name: '',
         image_url: '',
@@ -194,6 +195,15 @@ export default {
     },
     handleCloseModal(){
       this.$emit('close-modal')
+    },
+    startProcessing: function () {
+      this.processing = true
+    },
+    endProcessing: function () {
+      this.processing = false
+    },
+    isProcessing: function () {
+      return this.processing
     }
   }
 }
