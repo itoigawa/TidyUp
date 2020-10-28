@@ -204,7 +204,7 @@ export default {
         setTimeout(() => {
           console.log(`Submitted on ${new Date()}`);
           resolve();
-        }, 1000);
+        }, 1);
       });
     },
     handleCloseModal(){
