@@ -32,7 +32,8 @@ const router = new Router({
     {
       path: '/delete-list',
       component: DeleteListIndex,
-      name: 'DeliteListIndex'
+      name: 'DeliteListIndex',
+      meta: { requiredAuth: true }
     },
     {
       path: '*',
